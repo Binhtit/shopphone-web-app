@@ -1,0 +1,3 @@
+Thay đổi cột name -> giới hạn ký tự lên 250
+Thêm cột date_update kiểu dữ liệu datetime (getdate())	tương tự bên cột present_time của tb_token
+Thêm cột type kiểu dl int 1:phone, 2:Tai nghe, 3:Khác

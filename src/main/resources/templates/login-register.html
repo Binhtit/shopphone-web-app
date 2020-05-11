@@ -1,0 +1,127 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- login-register31:27-->
+
+<head th:replace="component :: fr_head"></head>
+
+<body>
+    <!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+    <!-- Begin Body Wrapper -->
+    <div class="body-wrapper">
+        <!-- Begin Header Area -->
+        <header th:replace="component :: fr_header"></header>
+        <!-- Header Area End Here -->
+        <!-- Begin Li's Breadcrumb Area -->
+        <div class="breadcrumb-area">
+            <div class="container">
+                <div class="breadcrumb-content">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li class="active">Login Register</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Li's Breadcrumb Area End Here -->
+        <!-- Begin Login Content Area -->
+        <div class="page-section mb-60">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6 mb-30">
+                        <!-- Login Form s-->
+                        <form id="login-form" action="#">
+                            <div class="login-form">
+                                <h4 class="login-title">Login</h4>
+                                <i id="login-alert" class="text-danger"></i>
+                                <div class="row">
+                                    <div class="col-md-12 col-12 mb-20">
+                                        <label>Email Address*</label>
+                                        <input class="mb-0" name="username" id="username" type="email" placeholder="Email Address">
+                                    </div>
+                                    <div class="col-12 mb-20">
+                                        <label>Password</label>
+                                        <input class="mb-0" name="password" id="password" type="password" placeholder="Password">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="check-box d-inline-block ml-0 ml-md-2 mt-10">
+                                            <input type="checkbox" id="remember_me">
+                                            <label for="remember_me">Remember me</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-10 mb-20 text-left text-md-right">
+                                        <a href="#"> Forgotten pasward?</a>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input class="btn bg-info text-white btn-md login-button" type="button" onclick="login();" value="Đăng nhập" />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12">
+                        <form id="register-form" action="#">
+                            <div class="login-form">
+                                <h4 class="login-title">Đăng ký</h4>
+                                <div><i id="register-msg" class="text-danger"></i></div>
+                                <!-- success-register -->
+                                <div id="form-register-success" class="row d-none justify-content-center align-content-center">
+                                    <i class="far fa-laugh-beam register-success-icon text-success"></i>
+
+                                    </i>
+                                    <h5 class="text-success mb-100">Bạn đã đăng ký thành công!</h5>
+                                </div>
+
+                                <div id="form-register" class="row">
+                                    <div class="col-md-6 col-12 mb-20">
+                                        <label>Tên</label>
+                                        <input id="register-first-name" class="mb-0" type="text" name="firstname" required placeholder="Nhập tên của bạn">
+                                    </div>
+                                    <div class="col-md-6 col-12 mb-20">
+                                        <label>Họ</label>
+                                        <input id="register-last-name" class="mb-0" type="text" name="lastname" required placeholder="Nhập họ và tên đệm">
+                                    </div>
+                                    <div class="col-md-12 mb-20">
+                                        <label>Địa chỉ</label>
+                                        <input id="register-address" class="mb-0" type="text" name="address" required placeholder="Nhập địa chỉ của bạn">
+                                    </div>
+                                    <div class="col-md-6 mb-20">
+                                        <label>Email</label>
+                                        <input id="register-email" class="mb-0" type="email" name="email" required placeholder="Nhập địa chỉ Email">
+                                    </div>
+                                    <div class="col-md-6 mb-20">
+                                        <label>Số điện thoại</label>
+                                        <input id="register-phone" class="mb-0" type="number" name="phone" required placeholder="Nhập số điện thoại">
+                                    </div>
+                                    <div class="col-md-6 mb-20">
+                                        <label>Mật khẩu</label>
+                                        <input id="register-pass" class="mb-0" type="password" name="pass" required placeholder="Nhập mật khẩu">
+                                    </div>
+                                    <div class="col-md-6 mb-20">
+                                        <label>Xác nhận mật khẩu</label>
+                                        <input id="register-confirm-pass" class="mb-0" type="password" required placeholder="Nhập lại mật khẩu">
+                                    </div>
+                                    <div class="col-12">
+                                        <button id="register" class="register-button mt-0">Đăng ký</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Login Content Area End Here -->
+        <!-- Begin Footer Area -->
+        <div th:replace="component :: fr_footer" class="footer"></div>
+        <!-- Footer Area End Here -->
+    </div>
+    <!-- Body Wrapper End Here -->
+    <footer th:replace="component :: fr_footer_script"></footer>
+</body>
+
+<!-- login-register31:27-->
+
+</html>

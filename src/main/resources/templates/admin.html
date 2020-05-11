@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Quản Trị</title>
+
+            <!-- font-gg -->
+            <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+            <!-- Favicon -->
+            <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+            <!-- Main Style CSS -->
+            <link rel="stylesheet" th:href="@{/css/style.css}" href="../../css/style.css" />
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+            <!-- <script type="text/javascript" th:src="@{/js/vendor/modernizr-2.8.3.min.js}" src="../../js/vendor/modernizr-2.8.3.min.js"></script> -->
+      
+</head>
+<body>
+    <br>
+    <div class="container-fluid">
+      <div class="admin-title">
+        <h5>QUẢN TRỊ TRANG</h5>
+        <a href="/web/singout" type="button" class="btn btn-sm btn-outline-danger mar text-danger ml-10" >Đăng xuất</a>
+
+        <!-- <div onclick="goIndexPage();">
+        <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+        <span>Xem trang chủ</span>
+      </div> -->
+      </div>
+    <br>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#home">THÊM SP</a>
+        </li>
+        <li class="nav-item">
+        <a id="admin-crud-product" class="nav-link" data-toggle="tab" href="#menu1">CHỈNH SỬA SP</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#menu2">ĐƠN HÀNG</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content mb-10">
+        <div id="home" class="container tab-pane active"><br>
+                <h2>Thêm sản phẩm:</h2>
+                <form id="insert-product">
+                  <p><i id="admin-insert-product-msg" class="text-danger"></i></p>
+                  <div class="form-group d-flex">
+                    <label class="mr-10 col-2" for="name">Type:</label>
+                    <input id="type" type="number" class="form-control" placeholder="Loại sp: 1:Phone, 2:Tai nghe, 3:Pin, 4:khác" name="name"/>
+                  </div>
+
+                  <div class="form-group d-flex">
+                    <label class="mr-10 col-2" for="name">Name:</label>
+                    <input id="name" type="text" class="form-control" placeholder="Nhập tên sp" name="name"/>
+                  </div>
+
+                  <div class="form-group d-flex">
+                    <label class="mr-10 col-2" for="id_promotion">Id Promotion:</label>
+                    <input id="id_promotion" type="number" class="form-control" placeholder="Mã khuyến mãi" name="id_promotion"/>
+                  </div>
+
+                  <div class="form-group d-flex">
+                    <label class="mr-10 col-2" for="inventory">Id Inventory:</label>
+                    <input id="inventory" type="number" class="form-control" placeholder="Nhập hàng tồn kho" name="inventory"/>
+                  </div>
+
+                  <div class="form-group d-flex">
+                    <label class="mr-10 col-2" for="producer">Producer:</label>
+                    <input id="producer" type="text" class="form-control" placeholder="Enter Producer" name="producer"/>
+                  </div>
+
+                  <div class="form-group d-flex">
+                    <label class="mr-10 col-2" for="ram">Ram:</label>
+                    <input id="ram" type="number" class="form-control" placeholder="Enter ram" name="ram"/>
+                  </div>
+
+                  <div class="form-group d-flex">
+                    <label class="mr-10 col-2" for="cpu">Cpu:</label>
+                    <input id="cpu" type="text" class="form-control" placeholder="Enter cpu" name="cpu"/>
+                  </div>
+
+                  <div class="form-group d-flex">
+                    <label class="mr-10 col-2" for="monitor">Monitor:</label>
+                    <input id="monitor" type="text" class="form-control" placeholder="Enter monitor" name="monitor"/>
+                  </div>
+
+                  <div class="form-group d-flex">
+                    <label class="mr-10 col-2" for="system">System:</label>
+                    <input id="system" type="text" class="form-control" placeholder="Enter system" name="system"/>
+                  </div>
+
+                  <div class="form-group d-flex">
+                    <label class="mr-10 col-2" for="color">Color:</label>
+                    <input id="color" type="text" class="form-control" placeholder="Enter color" name="color"/>
+                  </div>
+                  
+                  <div class="form-group d-flex">
+                    <label class="mr-10 col-2" for="rom">Rom:</label>
+                    <input id="rom" type="number" class="form-control" placeholder="Enter rom" name="rom"/>
+                  </div>
+
+                  <div class="form-group d-flex">
+                    <label class="mr-10 col-2" for="font_camera">Camera trước:</label>
+                    <input id="font_camera" type="text" class="form-control" placeholder="Enter font camera" name="font_camera"/>
+                  </div>
+
+                  <div class="form-group d-flex">
+                    <label class="mr-10 col-2" for="back_camera">Camera sau:</label>
+                    <input id="back_camera" type="text" class="form-control" placeholder="Enter back camera" name="back_camera"/>
+                  </div>
+
+                  <div class="form-group d-flex">
+                    <label class="mr-10 col-2" for="battery">Pin:</label>
+                    <input id="battery" type="text" class="form-control" placeholder="Enter battery" name="battery"/>
+                  </div>
+
+                  <div class="form-group d-flex">
+                    <label class="mr-10 col-2" for="image">Link Ảnh:</label>
+                    <input id="image" type="text" class="form-control" placeholder="Enter image url" name="image"/>
+                  </div>
+
+                  <div class="form-group d-flex">
+                    <label class="mr-10 col-2" for="sell_quantity">Sản lượng bán:</label>
+                    <input id="sell_quantity" type="number" class="form-control" placeholder="Enter sell quantity" name="sell_quantity"/>
+                  </div>
+
+                  <div class="form-group d-flex">
+                    <label class="mr-10 col-2" for="description">Mô tả:</label>
+                    <input id="description" type="text" class="form-control" placeholder="Enter description" name="description"/>
+                  </div>
+
+                  <div class="form-group d-flex">
+                    <label class="mr-10 col-2" for="rate">Rate:</label>
+                    <input id="rate" type="text" class="form-control" placeholder="Enter rate" name="rate"/>
+                  </div>
+
+                  <div class="form-group d-flex">
+                    <label class="mr-10 col-2" for="entry_price">Entry price:</label>
+                    <input id="entry_price" type="number" class="form-control" placeholder="Enter giá nhập vào (Số nguyên)" name="entry_price"/>
+                  </div>
+
+                  <div class="form-group d-flex">
+                    <label class="mr-10 col-2" for="price">Price:</label>
+                    <input id="price" type="number" class="form-control" placeholder="Enter giá bán (Số nguyên)" name="price"/>
+
+                  </div>
+                  <button id="insert-product-btn" class="btn btn-primary">Thêm sản phẩm</button>
+                </form>
+        </div>
+
+        
+        <div id="menu1" class="container-fluid tab-pane fade"><br>
+        <h3>Danh sách sản phẩm</h3>
+        <div class="table-responsive admin-height-scroll">
+          <table class="table table-hover table-striped table-sm">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Loại</th>
+                <th scope="col">Tên sp</th>
+                <th scope="col">Mã KM</th>
+                <th scope="col">Tồn kho</th>
+                <th scope="col">Nhà SX</th>
+                <th scope="col">RAM</th>
+                <th scope="col">CPU</th>
+                <th scope="col">Màn hình</th>
+                <th scope="col">Hệ thống</th>
+                <th scope="col">Màu</th>
+                <th scope="col">ROM</th>
+                <th scope="col">Camera trước</th>
+                <th scope="col">Camera sau</th>
+                <th scope="col">Pin</th>
+                <th scope="col">Ảnh</th>
+                <th scope="col">SL bán</th>
+                <th scope="col">Mô tả</th>
+                <th scope="col">Đánh giá</th>
+                <th scope="col">Giá nhập</th>
+                <th scope="col">Giá bán</th>
+              </tr>
+            </thead>
+            <tbody id="admin-list-produc-tbody">
+            
+            </tbody>
+          </table>
+        </div>
+        </div>
+
+
+        <div id="menu2" class="container tab-pane fade"><br>
+        <h3>Menu 2</h3>
+        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+        </div>
+    </div>
+    </div>
+    <footer th:replace="index::footer-script"></footer>
+</body>
+</html>
