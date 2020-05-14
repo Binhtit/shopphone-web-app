@@ -1,5 +1,7 @@
 package com.softech.shopphone.services.singleproduct;
 
+import java.net.InetAddress;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,17 +23,20 @@ public class SingleProductService {
 	
 	public DataHolder getSingleProduct(String userToken, Integer idProduct) {
 		DataHolder dataHolder  = new DataHolder();
-		
-		if (userToken != "") {
-			RstToken rstToken = tokenDao.getToken(userToken);
+		if (userToken != null) {
+			if (userToken != "") {
+				RstToken rstToken = tokenDao.getToken(userToken);
+				
+				if (rstToken == null) {
+					dataHolder.error("Lỗi hệ thống (token-SingleProductService)");
+					return dataHolder;
+				}
 			
-			if (rstToken == null) {
-				dataHolder.error("Lỗi hệ thống (token-SingleProductService)");
-				return dataHolder;
+				dataHolder.putModel("Iduser", rstToken.getIdLogin());
 			}
-		
-			dataHolder.putModel("Iduser", rstToken.getIdLogin());
 		}
+		
+	
 		
 		RstProduct rstProduct = productDao.getProduct1(idProduct);
 		

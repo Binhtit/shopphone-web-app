@@ -22,6 +22,7 @@ import com.softech.shopphone.dao.product.ProductDao;
 import com.softech.shopphone.entity.account.RstAccount;
 import com.softech.shopphone.entity.dataHolder.DataHolder;
 import com.softech.shopphone.entity.product.RstProduct;
+import com.softech.shopphone.services.cart.CartServices;
 //import com.softech.shopphone.entity.account.RstLogin;
 import com.softech.shopphone.services.login.LoginServices;
 
@@ -36,10 +37,12 @@ import com.softech.shopphone.services.login.LoginServices;
 public class LoginController {
 	@Autowired
 	private LoginDao loginDao;
+	
 	@Autowired
 	private LoginServices loginService;
+	
 	@Autowired
-
+	private CartServices cartServices;
 	
 	@GetMapping(path = "/web/login-register")
 	public String loginRegister() {
@@ -63,10 +66,6 @@ public class LoginController {
 			loginService.addCookie(response, rstAccount.getIdAccount());
 			
 			
-//			loginService.addProduct(dataHolder);	//add product
-//			loginService.addNewProduct(dataHolder);	//add new product		add product to_thymeleaf
-//			model.addAllAttributes(dataHolder.getModel());			//
-
 			dataHolder.setScreen("/web/index");
 			return new ResponseEntity<>(dataHolder, HttpStatus.OK);
 		}
@@ -81,11 +80,14 @@ public class LoginController {
 		loginService.confirmUser(dataHolder, user_token);
 		
 		
+		
 		loginService.addProductPhone(dataHolder);	        //add product
 		loginService.addNewProductPhone(dataHolder);	    //
 		loginService.addProductHeadphone(dataHolder);	    //
 		loginService.addProductBatteryBackup(dataHolder);	//
 		loginService.addProductOther(dataHolder);			//
+		
+		cartServices.getCart(user_token, dataHolder);		//add cart
 		
 		model.addAllAttributes(dataHolder.getModel());
 		return dataHolder.getScreen();
@@ -107,12 +109,15 @@ public class LoginController {
 	@GetMapping(path = "/web/singout")
 	public String singOut(@CookieValue(name = "user_token", required = false) String user_token, HttpServletRequest request, HttpServletResponse response, Model model) {
 		DataHolder dataHolder = loginService.singOut(request, response, user_token, model);
+		user_token = null;									//reset before to count cart
 		
 		loginService.addProductPhone(dataHolder);	        //add product
 		loginService.addNewProductPhone(dataHolder);	    //
 		loginService.addProductHeadphone(dataHolder);	    //
 		loginService.addProductBatteryBackup(dataHolder);	//
 		loginService.addProductOther(dataHolder);			//
+		
+		cartServices.getCart(user_token, dataHolder);		//add cart
 		
 		model.addAllAttributes(dataHolder.getModel());
 		return dataHolder.getScreen();

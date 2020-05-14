@@ -104,6 +104,123 @@ $('#register').click(function( event ) {
 });
 
 
+
+
+function addCart(idProduct){
+    var numProduct = 1
+    var dataLst = "idProduct="+idProduct+"&numProduct="+numProduct;
+
+    $.ajax({
+        url: "/web/addCart",
+        method: "POST",
+        data: dataLst,
+        success: result => {
+            processCartData(result);
+           
+        },
+        error: error => {
+            console.log("error");
+            alert('Lỗi hệ thống!!! ---> '+error);
+        }
+    });
+
+}
+
+function processCartData(result){
+    var keyData = result.data[0].keyData;
+
+    if (keyData == "rstCartTotal") {
+        valueData = result.data[0].valueData;
+        $('#cart-badge-num-product').text(valueData);
+    }
+    
+}
+
+
+$('#minicart').click(function(){
+
+
+    $.ajax({
+        url: "/web/getCart",
+        method: "POST",
+        // data: dataLst,
+        success: result => {
+            processGetCartData(result);
+           
+        },
+        error: error => {
+            console.log("error");
+            alert('Lỗi hệ thống!!! ---> '+error);
+        }
+    });
+
+})
+
+function processGetCartData(result){
+    $('#minicart-content').empty();
+
+    if (result.data[0].keyData == "LstCart") {
+        var lstC = result.data[0].valueData;
+        for (let i = 0; i < lstC.length; i++) {
+            $('#minicart-content').append(
+                '<li>'+
+                    '<a href="single-product.html" class="minicart-product-image">'+
+                        '<img src="' + lstC[i].image_product + '" alt="cart products">'+
+                    '</a>'+
+                    '<div class="minicart-product-details">'+
+                        '<h6><a href="single-product.html">' + lstC[i].name_product + '</a></h6>'+
+                        '<span>' + lstC[i].price_product + ' x ' + lstC[i].num_product + '</span>'+
+                    '</div>'+
+                    '<button class="close" title="Remove">'+
+                        '<i class="fa fa-close"></i>'+
+                    '</button>'+
+                '</li>'
+            )
+
+
+
+
+        }
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ================================================ADMIN=======================================
+
 $('#insert-product-btn').click(function(e){
     e.preventDefault();
     $('#admin-insert-product-msg').empty();

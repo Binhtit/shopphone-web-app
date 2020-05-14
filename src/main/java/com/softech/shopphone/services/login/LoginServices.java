@@ -103,17 +103,23 @@ public class LoginServices {
 //	check user		
 	public DataHolder confirmUser(DataHolder dataHolder, String userToken) {
 		
+		if (userToken == null || userToken.equals("")) {	//current_cus
+			
+			 	dataHolder.setScreen("index");
+				return dataHolder;
+			
+		}
 		RstToken rstToken = tokenDao.getToken(userToken);
 		
 		RstAccount rstAccount = loginDao.getAccount(rstToken.getIdLogin());
 		
-		if (rstAccount.getPermisstion() == 1) {
+		if (rstAccount.getPermisstion() == 1) {				//admin
 			dataHolder.add("accountInfo", rstAccount);
 			dataHolder.setScreen("admin");
 			return dataHolder;
 		}
 		
-		
+															//cus
 		dataHolder.add("accountInfo", rstAccount);
 		dataHolder.putModel("userName", rstAccount.getName());
 		

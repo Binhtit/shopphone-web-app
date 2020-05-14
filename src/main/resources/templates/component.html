@@ -167,16 +167,16 @@
                             </li>
                             <!-- Header Middle Wishlist Area End Here -->
                             <!-- Begin Header Mini Cart Area -->
-                            <li class="hm-minicart">
+                            <li id="minicart" class="hm-minicart">
                                 <div class="hm-minicart-trigger">
                                     <span class="item-icon"></span>
                                     <span class="item-text">£80.00
-                                        <span class="cart-item-count">2</span>
+                                        <span id="cart-badge-num-product" th:text="${rstCartTotal}" class="cart-item-count">21</span>
                                     </span>
                                 </div>
                                 <span></span>
                                 <div class="minicart">
-                                    <ul class="minicart-product-list">
+                                    <ul id="minicart-content"  class="minicart-product-list">
                                         <li>
                                             <a href="single-product.html" class="minicart-product-image">
                                                 <img src="/images/product/small-size/5.jpg" alt="cart products">
