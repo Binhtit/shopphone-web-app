@@ -6,3 +6,7 @@ FROM
 	TB_CART_CUS
 WHERE
 	ID_ACCOUNT = /*idAccount*/0
+AND
+	CART_STATUS = 0
+AND
+	DEL_F = 0

@@ -49,8 +49,9 @@ public class CartServices {
 		        	 numP = numP + rstCart.get(i).getNum_product();
 					
 				}
-		         dataHolder.putModel("rstCartTotal", numP);
 		         dataHolder.putModel("rstCart", rstCart);
+		         dataHolder.putModel("rstCartTotal", numP);
+
 				
 		         return dataHolder;
 			}
@@ -74,8 +75,9 @@ public class CartServices {
 	        	 numP = numP + rstCart.get(i).getNum_product();
 				
 			}
-	         dataHolder.putModel("rstCartTotal", numP);
 	         dataHolder.putModel("rstCart", rstCart);
+	         dataHolder.putModel("rstCartTotal", numP);
+
 	         
 	     }
 	     catch(Exception e)
@@ -89,7 +91,6 @@ public class CartServices {
 	 	}
 	
 	
-	@PostMapping(path = "/web/addCart")
 	public DataHolder addCart(String user_token, DataHolder dataHolder, Integer idProduct, Integer numProduct) {
 			
 			//Login
@@ -114,9 +115,9 @@ public class CartServices {
 			        	 numP = numP + rstCart.get(i).getNum_product();
 						
 					}
-			         dataHolder.add("rstCartTotal", numP);
 			         dataHolder.add("rstCart", rstCart);
-					
+			         dataHolder.add("rstCartTotal", numP);
+
 					
 				}
 			}
@@ -144,9 +145,9 @@ public class CartServices {
 						
 					}
 			         
-			         dataHolder.add("rstCartTotal", numP);
 			         dataHolder.add("rstCart", rstCart);
-			         
+			         dataHolder.add("rstCartTotal", numP);
+
 					
 		     }
 		     catch(Exception e)
@@ -170,7 +171,8 @@ public class CartServices {
 				
 				List<PrmCartCus> LstPrmCartCus = new ArrayList<PrmCartCus>();
 					
-					
+				Float TotalMoney = (float) 0;
+
 					for (RstCartCus Cart : rstCarts) {
 						PrmCartCus prmCart = new PrmCartCus();
 						RstProduct rstProduct = productDao.getProduct1(Cart.getId_product());
@@ -183,13 +185,18 @@ public class CartServices {
 						prmCart.setImage_product(rstProduct.getImage());
 						
 						LstPrmCartCus.add(prmCart);
+						TotalMoney = TotalMoney + rstProduct.getPrice();
+
 						
 					}
 				
 				
-				
 		         dataHolder.add("LstCart", LstPrmCartCus);
-				
+				 dataHolder.add("TotalMoney", TotalMoney);
+
+		         dataHolder.putModel("LstCart", LstPrmCartCus);
+		         dataHolder.putModel("TotalMoney", TotalMoney);
+
 		         return dataHolder;
 			}
 		}
@@ -203,7 +210,7 @@ public class CartServices {
 				
 	         
 
-				
+				Float TotalMoney = (float) 0;
 				for (RstCartCurrentCus Cart : rstCarts) {
 					PrmCartCurrentCus prmCart = new PrmCartCurrentCus();
 					RstProduct rstProduct = productDao.getProduct1(Cart.getId_product());
@@ -216,11 +223,16 @@ public class CartServices {
 					prmCart.setImage_product(rstProduct.getImage());
 					
 					LstPrmCartCurrentCus.add(prmCart);
-					
+					TotalMoney = TotalMoney + rstProduct.getPrice();
 				}
 	         
 	         
 		         dataHolder.add("LstCart", LstPrmCartCurrentCus);
+				 dataHolder.add("TotalMoney", TotalMoney);
+
+		         dataHolder.putModel("LstCart", LstPrmCartCurrentCus);
+		         dataHolder.putModel("TotalMoney", TotalMoney);
+
 				
 	     }
 	     catch(Exception e)

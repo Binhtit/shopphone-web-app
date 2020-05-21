@@ -1,0 +1,232 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- single-product-gallery-left31:48-->
+
+<head th:replace="component :: fr_head"></head>
+
+    <body onload="onloadCheckout();">
+    <!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+        <!-- Begin Body Wrapper -->
+        <div class="body-wrapper">
+            <!-- Begin Header Area -->
+            <header th:replace="component :: fr_header"></header>
+
+            <!-- Header Area End Here -->
+            <!-- Begin Li's Breadcrumb Area -->
+            <div class="breadcrumb-area">
+                <div class="container">
+                    <div class="breadcrumb-content">
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li class="active">Checkout</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Breadcrumb Area End Here -->
+            <!--Checkout Area Strat-->
+            <div class="checkout-area pt-60 pb-30">
+                <div class="container">
+           
+                    <div class="row">
+                        <div class="col-lg-6 col-12">
+                            <form action="#">
+                                <div class="checkbox-form">
+                                    <h3>Thông tin địa chỉ</h3>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="country-select clearfix">
+                                                <label>Country <span class="required">*</span></label>
+                                                <select class="nice-select wide">
+                                                  <option value="0">-Chọn tỉnh thành-</option>
+                                                  <option value="Hà Nội">Hà Nội</option>
+                                                  <option value="Đà Nẵng">Đà Nẵng</option>
+                                                  <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                                  <option value="Huế">Huế</option>
+                                                  <option value="Quảng Bình">Quảng Bình</option>
+                                                  <option value="Quảng Nam">Quảng Nam</option>
+                                                  <option value="Quy Nhơn">Quy Nhơn</option>
+                                                  <option value="Gia Lai">Gia Lai</option>
+                                                  <option value="Hải Phòng">Hải Phòng</option>
+                                                  <option value="Nghệ An">Nghệ An</option>
+                                                  <option value="Hà Tỉnh">Hà Tỉnh</option>
+                                                  <option value="Thanh Hoá">Thanh Hoá</option>
+                                                  <option value="Phú Quốc">Phú Quốc</option>
+                                                  <option value="Cần Thơ">Cần Thơ</option>
+                                                  <option value="Nha Trang">Nha Trang</option>
+                                                  <option value="Đà Lạt">Đà Lạt</option>
+                                                  <option value="Rạch Giá">Rạch Giá</option>
+                                                  <option value="Cà Mau">Cà Mau</option>
+                                                  <option value="Pleiku">Pleiku</option>
+                                                  <option value="Tuy Hoà">Tuy Hoà</option>
+                                                  <option value="Quảng Ninh">Quảng Ninh</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div></div>
+
+                                        <div class="col-md-6">
+                                            <div class="checkout-form-list">
+                                                <label>Họ và tên <span class="required">*</span></label>
+                                                <input th:value="${accountInfo.name}" id="checkout_cus_name" placeholder="" type="text">
+                                            </div>
+                                        </div>
+                                    
+                            
+                                        <div class="col-md-12">
+                                            <div class="checkout-form-list">
+                                                <label>Địa chỉ <span class="required">*</span></label>
+                                                <input th:value="${accountInfo.address}" id="checkout_cus_address"  placeholder="Nhập địa chỉ" type="text">
+                                            </div>
+                                        </div>
+ 
+                                        <div class="col-md-6">
+                                            <div class="checkout-form-list">
+                                                <label>Email<span class="required">*</span></label>
+                                                <input th:value="${accountInfo.mail}" id="checkout_cus_email"  placeholder="" type="email">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="checkout-form-list">
+                                                <label>Điện thoại  <span class="required">*</span></label>
+                                                <input th:value="${accountInfo.phone}" id="checkout_cus_phone"  type="text">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="checkout-form-list create-acc">
+                                                <input id="cbox" type="checkbox">
+                                                <label>Tạo tài khoản đăng nhập lần sau.</label>
+                                            </div>
+                                            <div id="cbox-info" class="checkout-form-list create-account">
+                                                <p>Tạo một tài khoản bằng cách nhập thông tin dưới đây. Nếu bạn là khách hàng cũ, vui lòng đăng nhập ở đầu trang. <span class="required">*</span></label>
+                                                <input placeholder="Nhập mật khẩu" type="password">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="different-address">
+                                        <div class="order-notes">
+                                            <div class="checkout-form-list">
+                                                <label>Ghi chú.</label>
+                                                <textarea id="checkout_note" cols="30" rows="10" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <div class="your-order">
+                                <h3>THÔNG TIN GIỎ HÀNG</h3>
+                                <div class="your-order-table table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="cart-product-name">Sản phẩm</th>
+                                                <th class="cart-product-total">Thành tiền</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody th:each="LstCart : ${LstCart}">
+                                            <tr class="cart_item">
+                                              <td th:text="${LstCart.name_product}" class="cart-product-name"> Vestibulum suscipit<strong class="product-quantity"> × 1</strong></td>
+                                              <td th:text="${LstCart.price_product}" class="cart-product-total"><span class="amount check-price">£165.00</span></td>  
+                                            </tr>
+                                            
+                                        </tbody>
+                                        <tfoot>
+                                            <tr class="cart-subtotal">
+                                                <th>Thuế VAT</th>
+                                                <td><span class="amount">10%</span></td>
+                                            </tr>
+                                            <tr class="order-total">
+                                                <th>Tổng tiền</th>
+                                                <td><strong><span th:text="${TotalMoney}" class="amount check-price">00</span><span>&nbsp; VND</span></strong></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <div class="payment-method">
+                                    <div class="payment-accordion">
+                                        <div id="accordion">
+                                          <div class="card">
+                                            <div class="card-header" id="#payment-1">
+                                              <h5 class="panel-title">
+                                                <a class="" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                  Chọn phương thức thanh toán:
+                                                </a>
+                                              </h5>
+                                            </div>
+                                            <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                              <div class="card-body">
+                                                <p>Quý khách vui lòng kiểm tra đơn hàng và lựa chọn các phương thức thanh toán sau đây.</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="card">
+                                            <div class="card-header" id="#payment-2">
+                                              <h5 class="panel-title">
+                                                <a class="collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                  Thanh toán qua thẻ ATM
+                                                </a>
+                                              </h5>
+                                            </div>
+                                            <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                                              <div class="card-body">
+                                                <p>Tên chủ thẻ:     <b>Shopphone</b></p>
+                                                <p>Mã thẻ:      <b>0426 2354 4567</b></p>
+                                                <p>Chi nhánh:   <b>Agribank-Đà Nẵng</b></p></br>
+                                                <i>Lưu ý: Quý khách vui lòng điền thông tin đơn hàng vào nội dung chuyển khoản.</i>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="card">
+                                            <div class="card-header" id="#payment-3">
+                                              <h5 class="panel-title">
+                                                <a class="collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                  Thanh toán khi nhận hàng - COD
+                                                </a>
+                                              </h5>
+                                            </div>
+                                            <div id="collapseThree" class="collapse" data-parent="#accordion">
+                                              <div class="card-body">
+                                                <!-- <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p> -->
+                                                <div class="col-md-12">
+                                                    <div class="checkout-form-list create-acc">
+                                                        <input id="" type="checkbox">
+                                                        <label>Xác nhận</label>
+                                                    </div>
+                                                    <div id="cbox-info" class="checkout-form-list create-account" style="display: block;">
+                                                        <p>Khách hàng nhận hàng rồi thanh toán tiền hàng cho Shipper.</p>
+                                                     
+                                                    </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="order-button-payment">
+                                            <input value="Thanh toán" type="button" onclick="goOrder();">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Checkout Area End-->
+            <!-- Begin Footer Area -->
+            <div th:replace="component :: fr_footer" class="footer"></div>
+            <!-- Footer Area End Here -->
+        </div>
+        <!-- Body Wrapper End Here -->
+        <footer th:replace="component :: fr_footer_script"></footer>
+    </body>
+
+<!-- checkout31:27-->
+</html>

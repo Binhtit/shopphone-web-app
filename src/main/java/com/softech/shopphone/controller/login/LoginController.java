@@ -23,6 +23,7 @@ import com.softech.shopphone.entity.account.RstAccount;
 import com.softech.shopphone.entity.dataHolder.DataHolder;
 import com.softech.shopphone.entity.product.RstProduct;
 import com.softech.shopphone.services.cart.CartServices;
+import com.softech.shopphone.services.checkout.CheckoutServices;
 //import com.softech.shopphone.entity.account.RstLogin;
 import com.softech.shopphone.services.login.LoginServices;
 
@@ -44,10 +45,13 @@ public class LoginController {
 	@Autowired
 	private CartServices cartServices;
 	
+
+	
 	@GetMapping(path = "/web/login-register")
 	public String loginRegister() {
 		return "login-register";
 	}
+
 	
 	// 1
 	@PostMapping(path = "/web/login")
@@ -126,8 +130,7 @@ public class LoginController {
 	
 	
 	
-	
-	
+
 	
 	
 	

@@ -183,10 +183,32 @@ function processGetCartData(result){
         }
     }
 
-
-
 }
 
+function goOrder(){
+    var cusName = $('#checkout_cus_name').val();
+    var cusAddress = $('#checkout_cus_address').val();
+    var cusEmail = $('#checkout_cus_email').val();
+    var cusPhone = $('#checkout_cus_phone').val();
+    var cusNote = $('#checkout_note').val();
+
+    var dataLst = "cusName="+cusName+"&cusAddress="+cusAddress+"&cusEmail="+cusEmail+"&cusPhone="+cusPhone+"&cusNote="+cusNote;
+
+    $.ajax({
+        url: "/web/goorder",
+        method: "POST",
+        data: dataLst,
+        success: result => {
+            processGetCartData(result);
+           
+        },
+        error: error => {
+            console.log("error");
+            alert('Lỗi hệ thống!!! ---> '+error);
+        }
+    });
+
+}
 
 
 
@@ -405,3 +427,8 @@ function CrudEedit(id_product){
     $('span.row-id-'+id_product).addClass('d-none');
 
 };
+
+
+function onloadCheckout(){
+    
+}

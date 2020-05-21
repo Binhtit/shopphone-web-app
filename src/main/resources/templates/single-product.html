@@ -19,8 +19,8 @@
             <div class="container">
                 <div class="breadcrumb-content">
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li class="active">Single Product Gallery Left</li>
+                        <li><a href="/">Home</a></li>
+                        <li th:text="${rstProduct.name}" class="active"></li>
                     </ul>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                                         <span th:text="${rstProduct.description}"></span>
                                     </p>
                                 </div>
-                                <div class="product-variants">
+                                <!-- <div class="product-variants">
                                     <div class="produt-variants-size">
                                         <label>Dimension</label>
                                         <select class="nice-select">
@@ -79,7 +79,7 @@
                                                 <option value="3" title="L">80x120cm</option>
                                             </select>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="single-add-to-cart">
                                     <form action="#" class="cart-quantity">
                                         <div class="quantity">
@@ -615,7 +615,7 @@
                                                     </span>
                                             </p>
                                         </div>
-                                        <div class="product-variants">
+                                        <!-- <div class="product-variants">
                                             <div class="produt-variants-size">
                                                 <label>Dimension</label>
                                                 <select class="nice-select">
@@ -624,7 +624,7 @@
                                                         <option value="3" title="L">80x120cm</option>
                                                     </select>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="single-add-to-cart">
                                             <form action="#" class="cart-quantity">
                                                 <div class="quantity">
