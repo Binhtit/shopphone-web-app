@@ -104,7 +104,44 @@ $('#register').click(function( event ) {
 });
 
 
+function quickView(idProduct){
+    var dataLst = "idProduct="+idProduct;
+    $.ajax({
+        url: "/web/quickView",
+        method: "POST",
+        data: dataLst,
+        success: result => {
+            processquickView(result);
+           
+        },
+        error: error => {
+            console.log("error");
+            alert('Lỗi hệ thống!!! ---> '+error);
+        }
+    });
+}
 
+function processquickView(result){
+    var keyData = result.data[0].keyData;
+
+    if (keyData == "rstProduct") {
+        valueData = result.data[0].valueData;
+        $('#qv-name-product').text(valueData.name);
+        $('#qv-price-product').text(valueData.price);
+        $('#qv-description-product').text(valueData.description);
+        $('#qv-add-cart').html(
+            '<div class="col-md-6">'+
+            '<button class="btn btn-warning qv-add-cart" type="submit" data-dismiss="modal" aria-label="Close" onclick="addCart(' + valueData.id_product + ');">Thêm vào giỏ</button>'+
+            '</div>'+
+            '<div class="col-md-6">'+
+            '<a class="btn btn-success qv-add-cart" href="/web/single-product/'+ valueData.id_product +'" type="submit">Thanh toán</a>'+
+            '</div>'
+        );
+        $('#qv-image').html(
+            '<img src="'+ valueData.image +'" alt="product image">'
+        );
+    }
+}
 
 function addCart(idProduct){
     var numProduct = 1
@@ -116,6 +153,7 @@ function addCart(idProduct){
         data: dataLst,
         success: result => {
             processCartData(result);
+            addCartInMinicart();
            
         },
         error: error => {
@@ -137,7 +175,7 @@ function processCartData(result){
 }
 
 
-$('#minicart').click(function(){
+function addCartInMinicart(){
 
 
     $.ajax({
@@ -153,8 +191,7 @@ $('#minicart').click(function(){
             alert('Lỗi hệ thống!!! ---> '+error);
         }
     });
-
-})
+};
 
 function processGetCartData(result){
     $('#minicart-content').empty();
@@ -176,11 +213,8 @@ function processGetCartData(result){
                     '</button>'+
                 '</li>'
             )
-
-
-
-
         }
+        $('#cart-badge-num-product').text(lstC.length);
     }
 
 }

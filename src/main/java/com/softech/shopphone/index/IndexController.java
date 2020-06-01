@@ -1,4 +1,4 @@
-package com.softech.shopphone.controller.login;
+package com.softech.shopphone.index;
 
 
 import java.util.List;
@@ -26,6 +26,7 @@ import com.softech.shopphone.services.cart.CartServices;
 import com.softech.shopphone.services.checkout.CheckoutServices;
 //import com.softech.shopphone.entity.account.RstLogin;
 import com.softech.shopphone.services.login.LoginServices;
+import com.softech.shopphone.services.singleproduct.SingleProductService;
 
 /**
  * 
@@ -35,7 +36,7 @@ import com.softech.shopphone.services.login.LoginServices;
 
 
 @Controller
-public class LoginController {
+public class IndexController {
 	@Autowired
 	private LoginDao loginDao;
 	
@@ -44,6 +45,9 @@ public class LoginController {
 	
 	@Autowired
 	private CartServices cartServices;
+	
+	@Autowired
+	private SingleProductService singleProductService;
 	
 
 	
@@ -84,18 +88,14 @@ public class LoginController {
 		loginService.confirmUser(dataHolder, user_token);
 		
 		
+		loginService.processIndex(dataHolder, user_token);
 		
-		loginService.addProductPhone(dataHolder);	        //add product
-		loginService.addNewProductPhone(dataHolder);	    //
-		loginService.addProductHeadphone(dataHolder);	    //
-		loginService.addProductBatteryBackup(dataHolder);	//
-		loginService.addProductOther(dataHolder);			//
-		
-		cartServices.getCart(user_token, dataHolder);		//add cart
 		
 		model.addAllAttributes(dataHolder.getModel());
 		return dataHolder.getScreen();
 	}
+	
+
 	
 
 	@PostMapping(path = "/web/register")
@@ -103,8 +103,6 @@ public class LoginController {
 	public ResponseEntity<Object> register(@RequestParam String fistName, @RequestParam String lastName, @RequestParam String address, @RequestParam String email, @RequestParam Integer phone, @RequestParam String pass, HttpServletResponse response) {
 		
 		 DataHolder dataHolder = loginService.register(fistName, lastName, address, email, phone, pass);
-		
-		
 		
 		return new ResponseEntity<>(dataHolder, HttpStatus.OK);
 	}
@@ -115,13 +113,8 @@ public class LoginController {
 		DataHolder dataHolder = loginService.singOut(request, response, user_token, model);
 		user_token = null;									//reset before to count cart
 		
-		loginService.addProductPhone(dataHolder);	        //add product
-		loginService.addNewProductPhone(dataHolder);	    //
-		loginService.addProductHeadphone(dataHolder);	    //
-		loginService.addProductBatteryBackup(dataHolder);	//
-		loginService.addProductOther(dataHolder);			//
+		loginService.processIndex(dataHolder, user_token);
 		
-		cartServices.getCart(user_token, dataHolder);		//add cart
 		
 		model.addAllAttributes(dataHolder.getModel());
 		return dataHolder.getScreen();
@@ -129,13 +122,23 @@ public class LoginController {
 	}
 	
 	
+
+	@PostMapping(path = "/web/quickView")
+	@ResponseBody
+	public ResponseEntity<Object> quickView(@CookieValue(name = "user_token", required = false) String user_token, Model model, @RequestParam Integer idProduct) {
+		DataHolder dataHolder = new DataHolder();
+		
+		dataHolder = singleProductService.getSingleProduct(user_token, idProduct);
+		
+		return new ResponseEntity<>(dataHolder, HttpStatus.OK);
+	}
+	
+	
+	
+	
+	
 	
 
-	
-	
-	
-	
-	
 	
 	
 	

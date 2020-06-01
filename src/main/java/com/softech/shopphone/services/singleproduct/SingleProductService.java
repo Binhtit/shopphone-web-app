@@ -21,11 +21,11 @@ public class SingleProductService {
 	ProductDao productDao;
 	
 	
-	public DataHolder getSingleProduct(String userToken, Integer idProduct) {
+	public DataHolder getSingleProduct(String user_token, Integer idProduct) {
 		DataHolder dataHolder  = new DataHolder();
-		if (userToken != null) {
-			if (userToken != "") {
-				RstToken rstToken = tokenDao.getToken(userToken);
+		if (user_token != null) {
+			if (user_token != "") {
+				RstToken rstToken = tokenDao.getToken(user_token);
 				
 				if (rstToken == null) {
 					dataHolder.error("Lỗi hệ thống (token-SingleProductService)");
@@ -41,6 +41,8 @@ public class SingleProductService {
 		RstProduct rstProduct = productDao.getProduct1(idProduct);
 		
 		dataHolder.putModel("rstProduct", rstProduct);
+		dataHolder.add("rstProduct", rstProduct);
+		
 		dataHolder.setScreen("single-product");
 		
 		return dataHolder;

@@ -23,6 +23,7 @@ import com.softech.shopphone.entity.dataHolder.DataHolder;
 import com.softech.shopphone.entity.product.RstProduct;
 import com.softech.shopphone.entity.token.PrmToken;
 import com.softech.shopphone.entity.token.RstToken;
+import com.softech.shopphone.services.cart.CartServices;
 
 @Service
 public class LoginServices {
@@ -34,6 +35,9 @@ public class LoginServices {
 	
 	@Autowired
 	private ProductDao productDao;
+	
+	@Autowired
+	private CartServices cartServices;
 	
 	public void addCookie(HttpServletResponse response, Integer idAccount) {
 		
@@ -211,8 +215,18 @@ public class LoginServices {
 	
 	
 	
-	
-	
+	public DataHolder processIndex (DataHolder dataHolder, String user_token) {
+		
+		addProductPhone(dataHolder);	        //add product
+		addNewProductPhone(dataHolder);	    //
+		addProductHeadphone(dataHolder);	    //
+		addProductBatteryBackup(dataHolder);	//
+		addProductOther(dataHolder);	
+		
+		cartServices.getCart(user_token, dataHolder);		//add cart
+		
+		return dataHolder;
+	}
 	
 	
 	

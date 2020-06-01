@@ -28,13 +28,15 @@ public class MainController {
 	public String main(@CookieValue(name = "user_token", required = false) String user_token, HttpServletResponse response, Model model) {
 		DataHolder dataHolder = new DataHolder();
 		
-		loginService.addProductPhone(dataHolder);	        //add product
-		loginService.addNewProductPhone(dataHolder);	    //
-		loginService.addProductHeadphone(dataHolder);	    //
-		loginService.addProductBatteryBackup(dataHolder);	//
-		loginService.addProductOther(dataHolder);			//
+		loginService.processIndex(dataHolder, user_token);
 		
-		cartServices.getCart(user_token, dataHolder);		//add cart
+//		loginService.addProductPhone(dataHolder);	        //add product
+//		loginService.addNewProductPhone(dataHolder);	    //
+//		loginService.addProductHeadphone(dataHolder);	    //
+//		loginService.addProductBatteryBackup(dataHolder);	//
+//		loginService.addProductOther(dataHolder);			//
+//		
+//		cartServices.getCart(user_token, dataHolder);		//add cart
 		
 		model.addAllAttributes(dataHolder.getModel());
 		return "index";

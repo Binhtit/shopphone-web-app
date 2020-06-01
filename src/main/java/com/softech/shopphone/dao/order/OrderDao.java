@@ -26,7 +26,7 @@ public interface OrderDao {
 	@Insert(sqlFile = true)
 	public int insertCartCurrentCus(PrmCartCurrentCus prmCartCurrentCus);
 	
-	@Update
+	@Update(sqlFile = true)
 	public int setCartCurrentCusDone();
 	
 	
@@ -36,7 +36,7 @@ public interface OrderDao {
 	@Insert(sqlFile = true)
 	public int insertCartCus(PrmCartCus prmCartCus);
 	
-	@Update
+	@Update(sqlFile = true)
 	public int setCartCusDone();
 	
 	
