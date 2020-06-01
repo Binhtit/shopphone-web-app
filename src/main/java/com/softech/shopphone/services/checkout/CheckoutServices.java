@@ -3,6 +3,7 @@ package com.softech.shopphone.services.checkout;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -73,7 +74,8 @@ public class CheckoutServices {
 
 		PrmOrderCus prmOrderCus = new PrmOrderCus();
 		
-		
+		Calendar timeOrder	= Calendar.getInstance();	//get current time
+
 		
 		
 		//Login
@@ -84,11 +86,10 @@ public class CheckoutServices {
 				
 				List<RstCartCus> rstCarts = orderDao.getCartCus(rstToken.getIdLogin());	//list product
 				
-				Long timeOrder	= System.currentTimeMillis();
 				
-				orderDao.insertCountOrder(rstToken.getIdLogin().toString(), 0, timeOrder);	//làm get id để set vào trong tb order
+				orderDao.insertCountOrder(rstToken.getIdLogin().toString(), 0, timeOrder.getTime());	//làm get id để set vào trong tb order
 				
-				Integer idCountOrder = orderDao.getIdCountOrder(rstToken.getIdLogin().toString(), timeOrder);
+				Integer idCountOrder = orderDao.getIdCountOrder(rstToken.getIdLogin().toString(), timeOrder.getTime());
 				
 				
 				for (RstCartCus Cart : rstCarts) {			
@@ -106,8 +107,8 @@ public class CheckoutServices {
 					prmOrderCus.setNum_product(Cart.getNum_product());
 					
 					
-					Date date = new Date();
-					prmOrderCus.setDate_order(date);
+//					Date date = new Date();
+					prmOrderCus.setDate_order(timeOrder.getTime());
 					
 					orderDao.insertOrderCus(prmOrderCus);
 			
@@ -125,11 +126,11 @@ public class CheckoutServices {
 				  
 				  List<RstCartCurrentCus> rstCarts = orderDao.getCartCurrentCus(thisIp.getHostAddress());   
 				  
-				  Long timeOrder	= System.currentTimeMillis();
+//				  Long timeOrder	= System.currentTimeMillis();
 					
-				  orderDao.insertCountOrder(thisIp.toString(), 0, timeOrder);	//làm get id để set vào trong tb order
+				  orderDao.insertCountOrder(thisIp.toString(), 0, timeOrder.getTime());	//làm get id để set vào trong tb order
 				
-				  Integer idCountOrder = orderDao.getIdCountOrder(thisIp.toString(), timeOrder);
+				  Integer idCountOrder = orderDao.getIdCountOrder(thisIp.toString(), timeOrder.getTime());
 					
 				  
 				  for (RstCartCurrentCus Cart : rstCarts) {

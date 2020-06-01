@@ -13,6 +13,7 @@ INSERT INTO TB_ORDER (
 	
 )
 VALUES (
+	/*prmOrderCus.id_count_order*/0,
 	/*prmOrderCus.order_status*/0,
 	/*prmOrderCus.cus_id_ip*/'',
 	/*prmOrderCus.cus_name*/'',
