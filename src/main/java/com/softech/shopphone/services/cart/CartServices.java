@@ -191,8 +191,8 @@ public class CartServices {
 					}
 				
 				
-		         dataHolder.add("LstCart", LstPrmCartCus);
-				 dataHolder.add("TotalMoney", TotalMoney);
+		         dataHolder.add("LstCart", LstPrmCartCus);	//[0]
+				 dataHolder.add("TotalMoney", TotalMoney);	//[1]
 
 		         dataHolder.putModel("LstCart", LstPrmCartCus);
 		         dataHolder.putModel("TotalMoney", TotalMoney);

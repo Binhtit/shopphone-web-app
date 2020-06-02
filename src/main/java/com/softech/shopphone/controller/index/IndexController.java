@@ -1,4 +1,4 @@
-package com.softech.shopphone.index;
+package com.softech.shopphone.controller.index;
 
 
 import java.util.List;

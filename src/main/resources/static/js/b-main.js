@@ -206,7 +206,7 @@ function processGetCartData(result){
                     '</a>'+
                     '<div class="minicart-product-details">'+
                         '<h6><a href="single-product.html">' + lstC[i].name_product + '</a></h6>'+
-                        '<span>' + lstC[i].price_product + ' x ' + lstC[i].num_product + '</span>'+
+                        '<span class="price">' + lstC[i].price_product + '</span><span> x ' + lstC[i].num_product + '</span>'+
                     '</div>'+
                     '<button class="close" title="Remove">'+
                         '<i class="fa fa-close"></i>'+
@@ -214,7 +214,12 @@ function processGetCartData(result){
                 '</li>'
             )
         }
+        result.data[1].keyData == "TotalMoney"  ?   $('#minicart-total').text(result.data[1].valueData) : "0";
+
         $('#cart-badge-num-product').text(lstC.length);
+
+        convertPrice();
+
     }
 
 }
@@ -225,6 +230,7 @@ function goOrder(){
     var cusEmail = $('#checkout_cus_email').val();
     var cusPhone = $('#checkout_cus_phone').val();
     var cusNote = $('#checkout_note').val();
+    var checkoutCod = $('#checkout_note').val();    
 
     var dataLst = "cusName="+cusName+"&cusAddress="+cusAddress+"&cusEmail="+cusEmail+"&cusPhone="+cusPhone+"&cusNote="+cusNote;
 
@@ -359,6 +365,18 @@ $('#insert-product-btn').click(function(e){
 })
 
 function onLoadIndex(){
+        let prices = $('.price');
+    
+        for (let p of prices){
+            let value = p.innerText;
+            value = value.replace(/\s+/g, '');
+            value = value.replace(/[.]+/g, '');
+            let arr = value.split('');
+            let res = "";
+            for (let i = arr.length - 1; i >= 0; i --)
+                res = ((i && (arr.length - i)%3 == 0)?".":"") + arr[i] + res;
+            p.innerText = res;
+        }
     
 }
 
@@ -462,7 +480,34 @@ function CrudEedit(id_product){
 
 };
 
+function convertPrice(){
+    let prices = $('.price');
+
+    for (let p of prices){
+        let value = p.innerText;
+        value = value.replace(/\s+/g, '');
+        value = value.replace(/[.]+/g, '');
+        let arr = value.split('');
+        let res = "";
+        for (let i = arr.length - 1; i >= 0; i --)
+            res = ((i && (arr.length - i)%3 == 0)?".":"") + arr[i] + res;
+        p.innerText = res;
+    
+};
+}
 
 function onloadCheckout(){
+    let prices = $('.price');
+
+    for (let p of prices){
+        let value = p.innerText;
+        value = value.replace(/\s+/g, '');
+        value = value.replace(/[.]+/g, '');
+        let arr = value.split('');
+        let res = "";
+        for (let i = arr.length - 1; i >= 0; i --)
+            res = ((i && (arr.length - i)%3 == 0)?".":"") + arr[i] + res;
+        p.innerText = res;
     
+};
 }

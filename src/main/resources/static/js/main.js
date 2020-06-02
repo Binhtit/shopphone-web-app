@@ -333,6 +333,9 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
      amountprice.val("$" + sliderrange.slider("values", 0) +
          " - $" + sliderrange.slider("values", 1));
  });
+
+
+ 
  /*----------------------------------------*/
  /* 18. Category menu Activation
  /*----------------------------------------*/
