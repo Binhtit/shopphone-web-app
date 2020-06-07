@@ -5,4 +5,4 @@ FROM
 WHERE
 	id_ip_customer = /*IdIpAcount*/''
 AND
-	time_order = /*timeOrder*/0
+	time_order = /*idtmp*/''

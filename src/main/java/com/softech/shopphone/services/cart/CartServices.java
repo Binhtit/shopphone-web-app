@@ -1,6 +1,7 @@
 package com.softech.shopphone.services.cart;
 
 import java.net.InetAddress;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -184,9 +185,19 @@ public class CartServices {
 						prmCart.setPrice_product(rstProduct.getPrice());
 						prmCart.setImage_product(rstProduct.getImage());
 						
+						Integer numPtmp = Cart.getNum_product() == 0 ? 1 : Cart.getNum_product();	//check_error
 						LstPrmCartCus.add(prmCart);
-						TotalMoney = TotalMoney + rstProduct.getPrice();
+						TotalMoney = TotalMoney + (rstProduct.getPrice()*numPtmp);
+						
+						
+						
+						System.out.println(TotalMoney.toString());
 
+						System.out.println(String.format("%.0f", TotalMoney));
+						
+						  DecimalFormat df = new DecimalFormat("#");
+					        df.setMaximumFractionDigits(8);
+					        System.out.println(df.format(TotalMoney));
 						
 					}
 				
@@ -195,7 +206,7 @@ public class CartServices {
 				 dataHolder.add("TotalMoney", TotalMoney);	//[1]
 
 		         dataHolder.putModel("LstCart", LstPrmCartCus);
-		         dataHolder.putModel("TotalMoney", TotalMoney);
+		         dataHolder.putModel("TotalMoney", TotalMoney.toString());
 
 		         return dataHolder;
 			}

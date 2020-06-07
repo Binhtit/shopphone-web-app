@@ -156,7 +156,7 @@ public class LoginServices {
 		prmAccount.setEmail(email);
 		prmAccount.setPhone(phone);
 		prmAccount.setPassword(pass);
-		prmAccount.setPermission(COMMON.IS_ADMIN);
+		prmAccount.setPermission(COMMON.IS_CUS);
 		
 		loginDao.insertAccount(prmAccount);
 		

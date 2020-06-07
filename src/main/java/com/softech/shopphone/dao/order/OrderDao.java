@@ -46,8 +46,8 @@ public interface OrderDao {
 	
 	
 	@Insert(sqlFile = true)
-	public int insertCountOrder(String IdIpAcount, Integer totalPrice, Date timeOrder);
+	public int insertCountOrder(String IdIpAcount, Integer totalPrice, String timeOrder);
 	
 	@Select
-	public Integer getIdCountOrder(String IdIpAcount, Date timeOrder);
+	public Integer getIdCountOrder(String IdIpAcount, String idtmp);
 }

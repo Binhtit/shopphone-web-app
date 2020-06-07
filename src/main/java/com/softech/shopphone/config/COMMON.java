@@ -2,6 +2,7 @@ package com.softech.shopphone.config;
 
 public class COMMON {
 	public static final Integer IS_ADMIN = 1;
+	public static final Integer IS_CUS = 0;
 	
 	
 	

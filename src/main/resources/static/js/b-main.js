@@ -14,6 +14,11 @@ function alert(result){
 }
 
 
+function errorMsg(err){
+    $('#error-modal').modal("show");
+    $('#error-modal-msg').text(err);
+}
+
 function login() {
     console.log("run");
     console.log($("form").serialize());
@@ -144,7 +149,7 @@ function processquickView(result){
 }
 
 function addCart(idProduct){
-    var numProduct = 1
+    var numProduct = $('#quantity-product').val();
     var dataLst = "idProduct="+idProduct+"&numProduct="+numProduct;
 
     $.ajax({
@@ -172,6 +177,11 @@ function processCartData(result){
         $('#cart-badge-num-product').text(valueData);
     }
     
+}
+    // Pay cart
+function toPay(idP){
+    addCart(idP);
+    window.location.assign("/web/checkout")
 }
 
 
@@ -224,13 +234,23 @@ function processGetCartData(result){
 
 }
 
+
 function goOrder(){
+    $('.go-order-msg').empty();
     var cusName = $('#checkout_cus_name').val();
     var cusAddress = $('#checkout_cus_address').val();
     var cusEmail = $('#checkout_cus_email').val();
     var cusPhone = $('#checkout_cus_phone').val();
     var cusNote = $('#checkout_note').val();
     var checkoutCod = $('#checkout_note').val();    
+    if (cusName == "" || cusAddress == "" || cusEmail == "" || cusPhone == "") {
+        $('.go-order-msg').text('Bạn phải nhập đầy đủ thông tin địa chỉ!')
+
+        return;
+    }
+
+    window.scrollTo(0,0);
+    watingModal("show");
 
     var dataLst = "cusName="+cusName+"&cusAddress="+cusAddress+"&cusEmail="+cusEmail+"&cusPhone="+cusPhone+"&cusNote="+cusNote;
 
@@ -239,7 +259,7 @@ function goOrder(){
         method: "POST",
         data: dataLst,
         success: result => {
-            processGetCartData(result);
+            processGoOrderData(result);
            
         },
         error: error => {
@@ -248,10 +268,44 @@ function goOrder(){
         }
     });
 
+
 }
 
 
+function processGoOrderData(result){
+ watingModal("hide");
+ var data = result.data;
+ var msg = "";
+ for (let i = 0; i < data.length; i++) {
+    if (data[i].keyData == "error") {
+        errorMsg(data[i].valueData);
+        return;
+    } 
+    if(data[i].keyData == "idCheckOut"){
+        msg = data[i].valueData;
+    }
+     
+ }
+  
+    $('#checkOutId').text(msg);
+    $('#checkOutModel').modal("show");
+}
 
+
+function watingModal(status){
+    switch (status) {
+        case "show":
+            $('.waiting-modal').removeClass('d-none');
+            break;
+            
+        case "hide":
+            $('.waiting-modal').addClass('d-none');
+            break;
+        default:
+            break;
+    }
+   
+}
 
 
 
@@ -365,18 +419,19 @@ $('#insert-product-btn').click(function(e){
 })
 
 function onLoadIndex(){
-        let prices = $('.price');
+        // let prices = $('.price');
     
-        for (let p of prices){
-            let value = p.innerText;
-            value = value.replace(/\s+/g, '');
-            value = value.replace(/[.]+/g, '');
-            let arr = value.split('');
-            let res = "";
-            for (let i = arr.length - 1; i >= 0; i --)
-                res = ((i && (arr.length - i)%3 == 0)?".":"") + arr[i] + res;
-            p.innerText = res;
-        }
+        // for (let p of prices){
+        //     let value = p.innerText;
+        //     value = value.replace(/\s+/g, '');
+        //     value = value.replace(/[.]+/g, '');
+        //     let arr = value.split('');
+        //     let res = "";
+        //     for (let i = arr.length - 1; i >= 0; i --)
+        //         res = ((i && (arr.length - i)%3 == 0)?".":"") + arr[i] + res;
+        //     p.innerText = res;
+        // }
+        setInterval(onloadCheckout, 1000);
     
 }
 

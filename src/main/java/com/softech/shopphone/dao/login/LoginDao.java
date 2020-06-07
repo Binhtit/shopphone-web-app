@@ -1,6 +1,8 @@
 package com.softech.shopphone.dao.login;
 
 
+import java.util.List;
+
 import org.seasar.doma.Dao;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
@@ -20,6 +22,9 @@ import com.softech.shopphone.entity.account.RstAccount;
 public interface LoginDao {
 	@Select
 	public RstAccount getAccount(Integer idAccount);
+	
+	@Select
+	public List<RstAccount> getAccountByPermisstion(Integer permisstion);
 	
 	@Select
 	public RstAccount getLogin(String email, String password);

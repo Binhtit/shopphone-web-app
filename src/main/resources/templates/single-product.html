@@ -5,7 +5,7 @@
 
 <head th:replace="component :: fr_head"></head>
 
-<body>
+<body onload="onLoadIndex();">
     <!--[if lt IE 8]>
 		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
@@ -63,7 +63,7 @@
                                     </ul>
                                 </div>
                                 <div class="price-box pt-20">
-                                    <span class="new-price new-price-2" th:text="${rstProduct.price}">$57.98</span>
+                                    <span class="price new-price new-price-2" th:text="${rstProduct.price}">$57.98</span>
                                 </div>
                                 <div class="product-desc">
                                     <p>
@@ -81,17 +81,17 @@
                                     </div>
                                 </div> -->
                                 <div class="single-add-to-cart">
-                                    <form action="#" class="cart-quantity">
+                                    <div action="#" class="cart-quantity">
                                         <div class="quantity">
-                                            <label>Quantity</label>
+                                            <label>Số lượng</label>
                                             <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" value="1" type="text">
+                                                <input id="quantity-product" class="cart-plus-minus-box" value="1" type="text">
                                                 <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                                 <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                             </div>
                                         </div>
-                                        <button class="add-to-cart" type="submit">Mua ngay</button>
-                                    </form>
+                                        <button th:onclick="'toPay('+${rstProduct.id_product} +');'" class="add-to-cart" type="submit">Mua ngay</button>
+                                    </div>
                                 </div>
                                 <div class="product-additional-info pt-25">
                                     <a class="wishlist-btn" href="wishlist.html"><i class="fa fa-heart-o"></i>Add to wishlist</a>
@@ -310,7 +310,7 @@
                                                 </div>
                                                 <h4><a class="product_name" href="single-product.html">Accusantium dolorem1</a></h4>
                                                 <div class="price-box">
-                                                    <span class="new-price">$46.80</span>
+                                                    <span class="price new-price">$46.80</span>
                                                 </div>
                                             </div>
                                             <div class="add-actions">

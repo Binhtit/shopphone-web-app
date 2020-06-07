@@ -6,6 +6,6 @@ INSERT INTO TB_COUNT_ORDER (
 VALUES (
 	/*IdIpAcount*/'IdIpAcount',
 	/*totalPrice*/0,
-	/*timeOrder*/''
+	/*timeOrder*/0
 
 )
