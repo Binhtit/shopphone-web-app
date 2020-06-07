@@ -585,7 +585,7 @@ textarea:focus {
 .bg-1,
 .bg-2,
 .bg-3 {
-    background-image: url(images/slider/1.jpg);
+    background-image: url(/images/slider/1.jpg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -594,11 +594,11 @@ textarea:focus {
 }
 
 .bg-2 {
-    background-image: url(images/slider/2.jpg);
+    background-image: url(/images/slider/2.jpg);
 }
 
 .bg-3 {
-    background-image: url(images/slider/3.jpg);
+    background-image: url(/images/slider/3.jpg);
 }
 
 
