@@ -1,6 +1,7 @@
-package com.softech.shopphone.services.login;
+package com.softech.shopphone.services.index;
 
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -26,7 +27,7 @@ import com.softech.shopphone.entity.token.RstToken;
 import com.softech.shopphone.services.cart.CartServices;
 
 @Service
-public class LoginServices {
+public class IndexServices {
 	@Autowired
 	private TokenDao tokenDao;
 	
@@ -63,6 +64,10 @@ public class LoginServices {
 	public DataHolder addProductPhone(DataHolder dataHolder) {
 		
 		List<RstProduct> lstProductPhone = productDao.getProduct(COMMON.TYPE_PHONE);
+		for (RstProduct rstProduct : lstProductPhone) {
+			rstProduct.setPriceD(String.format("%.0f",rstProduct.getPrice()));
+		}
+		
 		dataHolder.putModel("lstProductPhone", lstProductPhone);
 
 		return dataHolder;
@@ -72,6 +77,10 @@ public class LoginServices {
 	public DataHolder addNewProductPhone(DataHolder dataHolder) {
 		
 		List<RstProduct> lstNewProductPhone = productDao.getNewProduct(COMMON.TYPE_PHONE);
+		for (RstProduct rstProduct : lstNewProductPhone) {
+			rstProduct.setPriceD(String.format("%.0f",rstProduct.getPrice()));
+		}
+		
 		dataHolder.putModel("lstNewProductPhone", lstNewProductPhone);
 		
 		return dataHolder;
@@ -81,6 +90,11 @@ public class LoginServices {
 	public DataHolder addProductHeadphone(DataHolder dataHolder) {
 		
 		List<RstProduct> lstProductHeadphone = productDao.getProduct(COMMON.TYPE_HEADPHONE);
+		
+		for (RstProduct rstProduct : lstProductHeadphone) {
+			rstProduct.setPriceD(String.format("%.0f",rstProduct.getPrice()));	//fix_E_NUMBER_FORMAT
+		}
+		
 		dataHolder.putModel("lstProductHeadphone", lstProductHeadphone);
 		
 		return dataHolder;
@@ -90,6 +104,11 @@ public class LoginServices {
 	public DataHolder addProductBatteryBackup(DataHolder dataHolder) {
 		
 		List<RstProduct> lstProductBatteryBackup = productDao.getProduct(COMMON.TYPE_BATTERYBACKUP);
+		
+		for (RstProduct rstProduct : lstProductBatteryBackup) {
+			rstProduct.setPriceD(String.format("%.0f",rstProduct.getPrice()));	//fix_E_NUMBER_FORMAT
+		}
+		
 		dataHolder.putModel("lstProductBatteryBackup", lstProductBatteryBackup);
 		
 		return dataHolder;
@@ -99,6 +118,11 @@ public class LoginServices {
 	public DataHolder addProductOther(DataHolder dataHolder) {
 		
 		List<RstProduct> lstProductOther = productDao.getProduct(COMMON.TYPE_OTHER);
+		
+		for (RstProduct rstProduct : lstProductOther) {
+			rstProduct.setPriceD(String.format("%.0f",rstProduct.getPrice()));
+		}
+		
 		dataHolder.putModel("lstProductOther", lstProductOther);
 		
 		return dataHolder;

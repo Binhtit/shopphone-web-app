@@ -48,6 +48,7 @@ public class RstProduct {
 	protected float entry_price;
 	@Column(name = "PRICE")
 	protected float price;
+	protected String priceD;
 	
 	public Integer getType() {
 		return type;
@@ -177,5 +178,13 @@ public class RstProduct {
 	public void setEntry_price(float entry_price) {
 		this.entry_price = entry_price;
 	}
+	public String getPriceD() {
+		return priceD;
+	}
+	public void setPriceD(String priceD) {
+		this.priceD = priceD;
+	}
+	
+	
 	
 }

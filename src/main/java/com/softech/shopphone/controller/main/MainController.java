@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.softech.shopphone.entity.dataHolder.DataHolder;
 import com.softech.shopphone.services.cart.CartServices;
-import com.softech.shopphone.services.login.LoginServices;
+import com.softech.shopphone.services.index.IndexServices;
 
 
 
 @Controller
 public class MainController {
 	@Autowired
-	private LoginServices loginService;
+	private IndexServices loginService;
 	
 	@Autowired
 	private CartServices cartServices;

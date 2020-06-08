@@ -191,13 +191,12 @@ public class CartServices {
 						
 						
 						
-						System.out.println(TotalMoney.toString());
 
-						System.out.println(String.format("%.0f", TotalMoney));
+//						System.out.println(String.format("%.0f", TotalMoney));
 						
-						  DecimalFormat df = new DecimalFormat("#");
-					        df.setMaximumFractionDigits(8);
-					        System.out.println(df.format(TotalMoney));
+//						  DecimalFormat df = new DecimalFormat("#");
+//					        df.setMaximumFractionDigits(8);
+//					        System.out.println(df.format(TotalMoney));
 						
 					}
 				
@@ -206,7 +205,7 @@ public class CartServices {
 				 dataHolder.add("TotalMoney", TotalMoney);	//[1]
 
 		         dataHolder.putModel("LstCart", LstPrmCartCus);
-		         dataHolder.putModel("TotalMoney", TotalMoney.toString());
+		         dataHolder.putModel("TotalMoney", String.format("%.0f", TotalMoney));
 
 		         return dataHolder;
 			}
@@ -234,7 +233,10 @@ public class CartServices {
 					prmCart.setImage_product(rstProduct.getImage());
 					
 					LstPrmCartCurrentCus.add(prmCart);
-					TotalMoney = TotalMoney + rstProduct.getPrice();
+					
+					Integer numPtmp = Cart.getNum_product() == 0 ? 1 : Cart.getNum_product();	//check_error
+					TotalMoney = TotalMoney + (rstProduct.getPrice()*numPtmp);
+					
 				}
 	         
 	         
@@ -242,7 +244,7 @@ public class CartServices {
 				 dataHolder.add("TotalMoney", TotalMoney);
 
 		         dataHolder.putModel("LstCart", LstPrmCartCurrentCus);
-		         dataHolder.putModel("TotalMoney", TotalMoney);
+		         dataHolder.putModel("TotalMoney", String.format("%.0f", TotalMoney));
 
 				
 	     }

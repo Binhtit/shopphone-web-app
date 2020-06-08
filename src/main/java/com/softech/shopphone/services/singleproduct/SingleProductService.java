@@ -40,6 +40,10 @@ public class SingleProductService {
 		
 		RstProduct rstProduct = productDao.getProduct1(idProduct);
 		
+		rstProduct.setPriceD(String.format("%.0f",rstProduct.getPrice()));	//fix_E_NUMBER_FORMAT
+		
+		
+		
 		dataHolder.putModel("rstProduct", rstProduct);
 		dataHolder.add("rstProduct", rstProduct);
 		

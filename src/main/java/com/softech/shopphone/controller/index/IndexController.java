@@ -24,8 +24,7 @@ import com.softech.shopphone.entity.dataHolder.DataHolder;
 import com.softech.shopphone.entity.product.RstProduct;
 import com.softech.shopphone.services.cart.CartServices;
 import com.softech.shopphone.services.checkout.CheckoutServices;
-//import com.softech.shopphone.entity.account.RstLogin;
-import com.softech.shopphone.services.login.LoginServices;
+import com.softech.shopphone.services.index.IndexServices;
 import com.softech.shopphone.services.singleproduct.SingleProductService;
 
 /**
@@ -41,7 +40,7 @@ public class IndexController {
 	private LoginDao loginDao;
 	
 	@Autowired
-	private LoginServices loginService;
+	private IndexServices loginService;
 	
 	@Autowired
 	private CartServices cartServices;
