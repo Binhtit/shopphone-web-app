@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,11 +15,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.softech.shopphone.entity.dataHolder.DataHolder;
 import com.softech.shopphone.entity.product.RstProduct;
 import com.softech.shopphone.services.admin.AdminServices;
+import com.softech.shopphone.services.index.IndexServices;
+import com.softech.shopphone.services.singleproduct.SingleProductService;
 
 @Controller
 public class AdminController {
 	@Autowired 
 	private AdminServices adminServices;
+	
+	@Autowired
+	private IndexServices loginService;
+	
+	@Autowired
+	SingleProductService singleProductService;
 	
 	@PostMapping(path = "/web/insert-product")
 	public @ResponseBody ResponseEntity<Object> insertProduct(@CookieValue(name = "user_token", required = false) String user_token,
@@ -60,13 +70,37 @@ public class AdminController {
 		return new ResponseEntity<>(dataHolder, HttpStatus.OK);
 	}
 	
-	@PostMapping(path = "/web/CRUDProduct")
+	@PostMapping(path = "/web/CRUDShowProduct")
 	@ResponseBody
-	public ResponseEntity<Object> CRUDProduct(@CookieValue(name = "user_token", required = false) String user_token, Model model){
-		DataHolder dataHolder = adminServices.CRUDProduct(user_token);
+	public ResponseEntity<Object> CRUDShowProduct(@CookieValue(name = "user_token", required = false) String user_token, Model model){
+		DataHolder dataHolder = adminServices.CRUDShowProduct(user_token);
 		
 		
 		return new ResponseEntity<>(dataHolder, HttpStatus.OK);
 	}
+	
+	
+	
+	@PostMapping(path = "web/admin-get-product")
+	@ResponseBody
+	public ResponseEntity<Object> getSingleProduct(@CookieValue(name = "user_token", required = false) String userToken, Integer idProduct, Model model) {
+		DataHolder dataHolder = new DataHolder();
+//		loginService.confirmUser(dataHolder, userToken);
+
+		singleProductService.getSingleProduct(dataHolder, userToken, idProduct);
+		
+		model.addAllAttributes(dataHolder.getModel());
+		return new ResponseEntity<>(dataHolder, HttpStatus.OK);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

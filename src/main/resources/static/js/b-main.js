@@ -438,10 +438,10 @@ function onLoadIndex(){
 $('#admin-crud-product').click(function (){
 
     $.ajax({
-        url: "/web/CRUDProduct",
+        url: "/web/CRUDShowProduct",
         method: "POST",
         success: result => {
-            processCRUDProduct(result);
+            processCRUDShowProduct(result);
         },
         error: error => {
             console.log("error");
@@ -450,88 +450,117 @@ $('#admin-crud-product').click(function (){
     })
 });
 
-function processCRUDProduct(result){
-    $('#admin-list-produc-tbody').empty();
+function processCRUDShowProduct(result){
+    $('#admin-product-list').empty();
     if (result.data[0].keyData == "lstProduct") {
         var lstP = result.data[0].valueData;
         for (let i = 0; i < lstP.length; i++) {
-           $('#admin-list-produc-tbody').append(
-                '<tr>' +
-                '<td scope="row" class="id-product"><span class=" row-id-' + lstP[i].id_product + ' ">'+ lstP[i].id_product +'</span></td>' + 
-                '<td scope="row" class="id-product"><textarea class="d-none row-id-' + lstP[i].id_product + ' ">'+ lstP[i].id_product +'</textarea></td>' + 
 
-                '<td scope="row" class="id-product"><span class=" row-id-' + lstP[i].id_product + ' ">'+ lstP[i].type +'</span></td>' +
-                '<td scope="row" class="id-product"><textarea class="d-none row-id-' + lstP[i].id_product + ' ">'+ lstP[i].type +'</textarea></td>' +
 
-                '<td class="name"><span class=" row-id-' + lstP[i].id_product + ' ">'+ lstP[i].name + '</span></td>' +
-                '<td class="name"><textarea class="d-none row-id-' + lstP[i].id_product + ' ">'+ lstP[i].name + '</textarea></td>' +
 
-                '<td class="id-promotion"><span class=" row-id-' + lstP[i].id_product + ' ">'+ lstP[i].id_promotion + '</span></td>' +
-                '<td class="id-promotion"><textarea class="d-none row-id-' + lstP[i].id_product + ' ">'+ lstP[i].id_promotion + '</textarea></td>' +
 
-                '<td class="inventory"><span class=" row-id-' + lstP[i].id_product + ' ">'+ lstP[i].inventory + '</span></td>' +
-                '<td class="inventory"><textarea class="d-none row-id-' + lstP[i].id_product + ' ">'+ lstP[i].inventory + '</textarea></td>' +
 
-                '<td class="producer"><span class=" row-id-' + lstP[i].id_product + ' ">'+ lstP[i].producer + '</span></td>' +
-                '<td class="producer"><textarea class="d-none row-id-' + lstP[i].id_product + ' ">'+ lstP[i].producer + '</textarea></td>' +
+           $('#admin-product-list').append(
+                        '<div class="col-lg-3 mt-15">'+
+                            '<div class="single-product-wrap">'+
+                                '<div class="product-image">'+
+                                    '<a>'+
+                                        '<img src="'+ lstP[i].image +'">'+
+                                    '</a>'+
+                                    '<span class="sticker">New</span>'+
+                                '</div>'+
+                                '<div class="product_desc">'+
+                                    '<div class="product_desc_info">'+
+                                        '<div class="product-review">'+
+                                            '<h5 class="manufacturer">'+
+                                                '<a href="shop-left-sidebar">'+ lstP[i].producer +'</a>'+
+                                            '</h5>'+
+                                            '<div class="rating-box">'+
+                                                '<ul class="rating">'+
+                                                    '<li><i class="fa fa-star-o"></i></li>'+
+                                                    '<li><i class="fa fa-star-o"></i></li>'+
+                                                    '<li><i class="fa fa-star-o"></i></li>'+
+                                                    '<li class="no-star"><i class="fa fa-star-o"></i></li>'+
+                                                    '<li class="no-star"><i class="fa fa-star-o"></i></li>'+
+                                                '</ul>'+
+                                            '</div>'+
+                                        '</div>'+
+                                        '<h4><div class="product_name">'+ lstP[i].name +'</div></h4>'+
+                                        '<div class="price-box">'+
+                                            '<span class="new-price price">$</span>'+ lstP[i].priceD +' <small>VND</small>'+
+                                        '</div>'+
+                                    '</div>'+
+                                    '<div class="add-actions">'+
+                                        '<ul class="add-actions-link li-cursor-pointer">'+
+                                            '<li class="add-cart active cursor-pointer" data-toggle="modal" data-target="#exampleModalCenter" onclick="adminCRUDEdit('+ lstP[i].id_product +');"><span>CHỈNH SỬA</span></li>'+
+                                        '</ul>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'
 
-                '<td class="ram"><span class=" row-id-' + lstP[i].id_product + ' ">'+ lstP[i].ram + '</span></td>' +
-                '<td class="ram"><textarea class="d-none row-id-' + lstP[i].id_product + ' ">'+ lstP[i].ram + '</textarea></td>' +
-
-                '<td class="cpu"><span class=" row-id-' + lstP[i].id_product + ' ">'+ lstP[i].cpu + '</span></td>' +
-                '<td class="cpu"><textarea class="d-none row-id-' + lstP[i].id_product + ' ">'+ lstP[i].cpu + '</textarea></td>' +
-
-                '<td class="monitor"><span class=" row-id-' + lstP[i].id_product + ' ">'+ lstP[i].monitor + '</span></td>' +
-                '<td class="monitor"><textarea class="d-none row-id-' + lstP[i].id_product + ' ">'+ lstP[i].monitor + '</textarea></td>' +
-
-                '<td class="system"><span class=" row-id-' + lstP[i].id_product + ' ">'+ lstP[i].system + '</span></td>' +
-                '<td class="system"><textarea class="d-none row-id-' + lstP[i].id_product + ' ">'+ lstP[i].system + '</textarea></td>' +
-
-                '<td class="color"><span class=" row-id-' + lstP[i].id_product + ' ">'+ lstP[i].color + '</span></td>' +
-                '<td class="color"><textarea class="d-none row-id-' + lstP[i].id_product + ' ">'+ lstP[i].color + '</textarea></td>' +
-
-                '<td class="rom"><span class=" row-id-' + lstP[i].id_product + ' ">'+ lstP[i].rom + '</span></td>' +
-                '<td class="rom"><textarea class="d-none row-id-' + lstP[i].id_product + ' ">'+ lstP[i].rom + '</textarea></td>' +
-
-                '<td class="font-camera"><span class=" row-id-' + lstP[i].id_product + ' ">'+ lstP[i].font_camera + '</span></td>' +
-                '<td class="font-camera"><textarea class="d-none row-id-' + lstP[i].id_product + ' ">'+ lstP[i].font_camera + '</textarea></td>' +
-                
-                '<td class="back-camera"><span class=" row-id-' + lstP[i].id_product + ' ">'+ lstP[i].back_camera + '</span></td>' +
-                '<td class="back-camera"><textarea class="d-none row-id-' + lstP[i].id_product + ' ">'+ lstP[i].back_camera + '</textarea></td>' +
-
-                '<td class="battery"><span class=" row-id-' + lstP[i].id_product + ' ">'+ lstP[i].battery + '</span></td>' +
-                '<td class="battery"><textarea class="d-none row-id-' + lstP[i].id_product + ' ">'+ lstP[i].battery + '</textarea></td>' +
-
-                '<td class="image"><span class=" row-id-' + lstP[i].id_product + ' ">'+ lstP[i].image + '</span></td>' +
-                '<td class="image"><textarea class="d-none row-id-' + lstP[i].id_product + ' ">'+ lstP[i].image + '</textarea></td>' +
-
-                '<td class="sell-quantity"><span class=" row-id-' + lstP[i].id_product + ' ">'+ lstP[i].sell_quantity + '</span></td>' +
-                '<td class="sell-quantity"><textarea class="d-none row-id-' + lstP[i].id_product + ' ">'+ lstP[i].sell_quantity + '</textarea></td>' +
-
-                '<td class="description"><span class=" row-id-' + lstP[i].id_product + ' ">'+ lstP[i].description + '</span></td>' +
-                '<td class="description"><textarea class="d-none row-id-' + lstP[i].id_product + ' ">'+ lstP[i].description + '</textarea></td>' +
-
-                '<td class="rate"><span class=" row-id-' + lstP[i].id_product + ' ">'+ lstP[i].rate + '</span></td>' +
-                '<td class="rate"><textarea class="d-none row-id-' + lstP[i].id_product + ' ">'+ lstP[i].rate + '</textarea></td>' +
-
-                '<td class="entry-price"><span class=" row-id-' + lstP[i].id_product + ' ">'+ lstP[i].entry_price + '</span></td>' +
-                '<td class="entry-price"><textarea class="d-none row-id-' + lstP[i].id_product + ' ">'+ lstP[i].entry_price + '</textarea></td>' +
-
-                '<td class="price"><span class=" row-id-' + lstP[i].id_product + ' ">'+ lstP[i].price + '</span></td>' +
-                '<td class="price"><textarea class="d-none row-id-' + lstP[i].id_product + ' ">'+ lstP[i].price + '</textarea></td>' +
-
-                '<td class=""> <input onclick="CrudEedit(' + lstP[i].id_product + ');" type="button" value="Chỉnh sửa" /> <input style="margin-left: 10px;" onclick="CrudDelete(' + lstP[i].id_product + ');" type="button" value="Xoá" /></td>' +
-                '</tr>'
-           ); 
+           )
         }
       
     }
     
 };
 
-function CrudEedit(id_product){
-    $('textarea.row-id-'+id_product).removeClass('d-none');
-    $('span.row-id-'+id_product).addClass('d-none');
+
+function adminCRUDEdit(idProduct){
+var dataLst = "idProduct=" + idProduct;
+
+    $.ajax({
+        url: "/web/admin-get-product",
+        method: "POST",
+        data: dataLst,
+        success: result => {
+            processAdminCRUDEdit(result);
+        },
+        error: error => {
+            console.log("error");
+            alert('Lỗi hệ thống!!! ---> '+error);
+        }
+    })
+
+
+
+}
+
+function processAdminCRUDEdit(result){
+    $('#admin-modal-body').empty();
+    $('#admin-modal-title').empty();
+    if (result.data[0].keyData == "rstProduct") {
+
+
+    var product = result.data[0].valueData;
+
+
+    $('#admin-modal').modal("show");
+    $('#admin-modal-title').text(product.name);
+    $('#admin-modal-body').html(
+        '<input id="productName" type="text" value="' + product.name +'"/>'+
+        '<input id="productType" type="text" value="' + product.type +'"/>'+
+        '<input id="productName" type="text" value="' + product.id_promotion +'"/>'+
+        '<input id="productName" type="text" value="' + product.inventory +'"/>'+
+        '<input id="productName" type="text" value="' + product.producer +'"/>'+
+        '<input id="productName" type="text" value="' + product.ram +'"/>'+
+        '<input id="productName" type="text" value="' + product.cpu +'"/>'+
+        '<input id="productName" type="text" value="' + product.monitor +'"/>'+
+        '<input id="productName" type="text" value="' + product.system +'"/>'+
+        '<input id="productName" type="text" value="' + product.color +'"/>'+
+        '<input id="productName" type="text" value="' + product.rom +'"/>'+
+        '<input id="productName" type="text" value="' + product.font_camera +'"/>'+
+        '<input id="productName" type="text" value="' + product.battery +'"/>'+
+        '<input id="productName" type="text" value="' + product.image +'"/>'+
+        '<input id="productName" type="text" value="' + product.sell_quantity +'"/>'+
+        '<input id="productName" type="text" value="' + product.description +'"/>'+
+        '<input id="productName" type="text" value="' + product.rate +'"/>'+
+        '<input id="productName" type="text" value="' + product.entry_price +'"/>'+
+        '<input id="productName" type="text" value="' + product.price +'"/>'
+    );
+
+    }
 
 };
 

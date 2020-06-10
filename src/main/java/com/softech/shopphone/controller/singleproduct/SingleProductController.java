@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.softech.shopphone.entity.dataHolder.DataHolder;
+import com.softech.shopphone.services.cart.CartServices;
 import com.softech.shopphone.services.index.IndexServices;
 import com.softech.shopphone.services.singleproduct.SingleProductService;
 
@@ -19,6 +20,9 @@ public class SingleProductController {
 	
 	@Autowired
 	private IndexServices loginService;
+
+	@Autowired
+	private CartServices cartServices;
 	
 	@GetMapping(path = "web/single-product" + "/{idProduct}")
 	public String checkLogin(@CookieValue(name = "user_token", required = false) String userToken, @PathVariable Integer idProduct, Model model) {
@@ -26,6 +30,8 @@ public class SingleProductController {
 		loginService.confirmUser(dataHolder, userToken);
 
 		singleProductService.getSingleProduct(dataHolder, userToken, idProduct);
+		cartServices.getCart(userToken, dataHolder);	
+		
 		model.addAllAttributes(dataHolder.getModel());
 		return dataHolder.getScreen();
 	}

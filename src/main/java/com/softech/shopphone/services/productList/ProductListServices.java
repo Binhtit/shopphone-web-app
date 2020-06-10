@@ -16,17 +16,22 @@ public class ProductListServices {
 	private ProductDao productDao;
 	
 
-	public DataHolder getProductList(Integer typeProduct) {
-		DataHolder dataHolder = new DataHolder();
+	public DataHolder getProductList(DataHolder dataHolder, Integer typeProduct) {
 		
-		List<RstProduct>rstProduct = productDao.getProduct(typeProduct);
+		List<RstProduct>rstProductLst = productDao.getProduct(typeProduct);
+		for (RstProduct rstProduct : rstProductLst) {
+			rstProduct.setPriceD(String.format("%.0f",rstProduct.getPrice()));
+		}
 		
-		if (rstProduct == null) {
+		
+		if (rstProductLst == null) {
 			dataHolder.error("Hệ thống lỗi. không tìm thấy sản phẩm");
 			return dataHolder;
 		}
 		
-		dataHolder.putModel("rstProduct", rstProduct);
+		dataHolder.putModel("rstProductLst", rstProductLst);
+		
+		dataHolder.setScreen("product-list");
 
 		return dataHolder;
 	}
