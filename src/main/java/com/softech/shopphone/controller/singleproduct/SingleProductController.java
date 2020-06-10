@@ -22,9 +22,10 @@ public class SingleProductController {
 	
 	@GetMapping(path = "web/single-product" + "/{idProduct}")
 	public String checkLogin(@CookieValue(name = "user_token", required = false) String userToken, @PathVariable Integer idProduct, Model model) {
-		DataHolder dataHolder = singleProductService.getSingleProduct(userToken, idProduct);
-		
-		loginService.confirmUser(dataHolder, user_token);
+		DataHolder dataHolder = new DataHolder();
+		loginService.confirmUser(dataHolder, userToken);
+
+		singleProductService.getSingleProduct(dataHolder, userToken, idProduct);
 		model.addAllAttributes(dataHolder.getModel());
 		return dataHolder.getScreen();
 	}

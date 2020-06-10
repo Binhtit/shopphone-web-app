@@ -128,7 +128,7 @@ public class IndexController {
 	public ResponseEntity<Object> quickView(@CookieValue(name = "user_token", required = false) String user_token, Model model, @RequestParam Integer idProduct) {
 		DataHolder dataHolder = new DataHolder();
 		
-		dataHolder = singleProductService.getSingleProduct(user_token, idProduct);
+		singleProductService.getSingleProduct(dataHolder, user_token, idProduct);
 		
 		return new ResponseEntity<>(dataHolder, HttpStatus.OK);
 	}

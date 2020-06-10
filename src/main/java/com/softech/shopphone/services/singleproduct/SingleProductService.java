@@ -21,8 +21,8 @@ public class SingleProductService {
 	ProductDao productDao;
 	
 	
-	public DataHolder getSingleProduct(String user_token, Integer idProduct) {
-		DataHolder dataHolder  = new DataHolder();
+	public DataHolder getSingleProduct(DataHolder dataHolder, String user_token, Integer idProduct) {
+//		dataHolder  = new DataHolder();
 		if (user_token != null) {
 			if (user_token != "") {
 				RstToken rstToken = tokenDao.getToken(user_token);
