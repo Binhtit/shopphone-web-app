@@ -8,7 +8,7 @@ public class PrmCartCus {
 	protected Integer id_product;
 	protected Integer num_product;
 	protected String name_product;
-	protected Float price_product;
+	protected String price_product;
 	protected String image_product;
 	
 	
@@ -38,10 +38,10 @@ public class PrmCartCus {
 	public void setName_product(String name_product) {
 		this.name_product = name_product;
 	}
-	public Float getPrice_product() {
+	public String getPrice_product() {
 		return price_product;
 	}
-	public void setPrice_product(Float price_product) {
+	public void setPrice_product(String price_product) {
 		this.price_product = price_product;
 	}
 	public String getImage_product() {

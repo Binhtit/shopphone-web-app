@@ -112,6 +112,7 @@ public class IndexController {
 		DataHolder dataHolder = loginService.singOut(request, response, user_token, model);
 		user_token = null;									//reset before to count cart
 		
+		loginService.confirmUser(dataHolder, user_token);
 		loginService.processIndex(dataHolder, user_token);
 		
 		

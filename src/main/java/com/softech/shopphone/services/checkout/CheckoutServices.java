@@ -30,19 +30,16 @@ import com.softech.shopphone.entity.token.RstToken;
 @Service
 public class CheckoutServices {
 	@Autowired
-	TokenDao tokendao;
+	private TokenDao tokendao;
 
 	@Autowired
-	LoginDao loginDao;
+	private LoginDao loginDao;
 
 	@Autowired
 	private TokenDao tokenDao;
 
 	@Autowired
 	private OrderDao orderDao;
-
-	@Autowired
-	private ProductDao productDao;
 
 	@Autowired
 	public JavaMailSender emailSender;

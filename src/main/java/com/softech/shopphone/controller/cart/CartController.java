@@ -26,6 +26,7 @@ import com.softech.shopphone.entity.product.RstProduct;
 import com.softech.shopphone.entity.token.RstToken;
 import com.softech.shopphone.services.cart.CartServices;
 import com.softech.shopphone.services.checkout.CheckoutServices;
+import com.softech.shopphone.services.index.IndexServices;
 
 @Controller
 public class CartController {
@@ -40,6 +41,9 @@ public class CartController {
 	
 	@Autowired
 	private CheckoutServices checkoutServices;
+	
+	@Autowired
+	private IndexServices loginService;
 	
 //	public DataHolder getCart(@CookieValue(name = "user_token", required = false) String user_token, Model model) {
 		
@@ -78,6 +82,7 @@ public class CartController {
 	public Object checkout(@CookieValue(name = "user_token", required = false) String user_token, Model model) {
 		DataHolder dataHolder = new DataHolder();
 		
+		loginService.confirmUser(dataHolder, user_token);
 		checkoutServices.checkout(user_token, dataHolder);
 				
 		cartServices.getCartDetail(user_token, dataHolder);

@@ -182,7 +182,8 @@ public class CartServices {
 						prmCart.setId_product(Cart.getId_product());
 						prmCart.setNum_product(Cart.getNum_product());
 						prmCart.setName_product(rstProduct.getName());
-						prmCart.setPrice_product(rstProduct.getPrice());
+						prmCart.setPrice_product(String.format("%.0f", rstProduct.getPrice()));
+						System.out.println(String.format("%.0f", rstProduct.getPrice()));
 						prmCart.setImage_product(rstProduct.getImage());
 						
 						Integer numPtmp = Cart.getNum_product() == 0 ? 1 : Cart.getNum_product();	//check_error
@@ -229,7 +230,7 @@ public class CartServices {
 					prmCart.setId_product(Cart.getId_product());
 					prmCart.setNum_product(Cart.getNum_product());
 					prmCart.setName_product(rstProduct.getName());
-					prmCart.setPrice_product(rstProduct.getPrice());
+					prmCart.setPrice_product(String.format("%.0f", rstProduct.getPrice()));
 					prmCart.setImage_product(rstProduct.getImage());
 					
 					LstPrmCartCurrentCus.add(prmCart);
