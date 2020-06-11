@@ -19,6 +19,11 @@ function errorMsg(err){
     $('#error-modal-msg').text(err);
 }
 
+function okMsg(okmsg){
+    $('#error-modal').modal("show");
+    $('#error-modal-msg').text(okmsg);
+}
+
 function login() {
     console.log("run");
     console.log($("form").serialize());
@@ -541,29 +546,130 @@ function processAdminCRUDEdit(result){
     $('#admin-modal-body').html(
         '<input id="productName" type="text" value="' + product.name +'"/>'+
         '<input id="productType" type="text" value="' + product.type +'"/>'+
-        '<input id="productName" type="text" value="' + product.id_promotion +'"/>'+
-        '<input id="productName" type="text" value="' + product.inventory +'"/>'+
-        '<input id="productName" type="text" value="' + product.producer +'"/>'+
-        '<input id="productName" type="text" value="' + product.ram +'"/>'+
-        '<input id="productName" type="text" value="' + product.cpu +'"/>'+
-        '<input id="productName" type="text" value="' + product.monitor +'"/>'+
-        '<input id="productName" type="text" value="' + product.system +'"/>'+
-        '<input id="productName" type="text" value="' + product.color +'"/>'+
-        '<input id="productName" type="text" value="' + product.rom +'"/>'+
-        '<input id="productName" type="text" value="' + product.font_camera +'"/>'+
-        '<input id="productName" type="text" value="' + product.battery +'"/>'+
-        '<input id="productName" type="text" value="' + product.image +'"/>'+
-        '<input id="productName" type="text" value="' + product.sell_quantity +'"/>'+
-        '<input id="productName" type="text" value="' + product.description +'"/>'+
-        '<input id="productName" type="text" value="' + product.rate +'"/>'+
-        '<input id="productName" type="text" value="' + product.entry_price +'"/>'+
-        '<input id="productName" type="text" value="' + product.price +'"/>'
+        '<input id="productId_promotion" type="text" value="' + product.id_promotion +'"/>'+
+        '<input id="productInventory" type="text" value="' + product.inventory +'"/>'+
+        '<input id="productProducer" type="text" value="' + product.producer +'"/>'+
+        '<input id="productRam" type="text" value="' + product.ram +'"/>'+
+        '<input id="productCpu" type="text" value="' + product.cpu +'"/>'+
+        '<input id="productMonitor" type="text" value="' + product.monitor +'"/>'+
+        '<input id="productSystem" type="text" value="' + product.system +'"/>'+
+        '<input id="productColor" type="text" value="' + product.color +'"/>'+
+        '<input id="productRom" type="text" value="' + product.rom +'"/>'+
+        '<input id="productFontCamera" type="text" value="' + product.font_camera +'"/>'+
+        '<input id="productBattery" type="text" value="' + product.battery +'"/>'+
+        '<input id="productImage" type="text" value="' + product.image +'"/>'+
+        '<input id="productSellQuantity" type="text" value="' + product.sell_quantity +'"/>'+
+        '<input id="productDescription" type="text" value="' + product.description +'"/>'+
+        '<input id="productRate" type="text" value="' + product.rate +'"/>'+
+        '<input id="productEntryPrice" type="text" value="' + product.entry_price +'"/>'+
+        '<input id="productPrice" type="text" value="' + product.price +'"/>'
     );
 
+
+    $('#modal-dialog-footer').html(
+        '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>'+
+        '<button type="button" class="btn btn-primary" onclick="adminCRUDEditConfirm('+product.id_product+');">Xác nhận</button>'+
+        '<button type="button" class="btn btn-danger" onclick="adminCRUDDeleteConfirm('+product.id_product+');">Xoá sản phẩm</button>'
+    )
     }
 
 };
 
+function adminCRUDEditConfirm(idProduct) {
+    var productName = $('#productName').val();
+    var productType = $('#productType').val();
+    var productId_promotion = $('#productId_promotion').val();
+    var productInventory = $('#productInventory').val();
+    var productProducer = $('#productProducer').val();
+    var productRam = $('#productRam').val();
+    var productCpu = $('#productCpu').val();
+    var productMonitor = $('#productMonitor').val();
+    var productSystem = $('#productSystem').val();
+    var productColor = $('#productColor').val();
+    var productRom = $('#productRom').val();
+    var productFontCamera = $('#productFontCamera').val();
+    var productBattery = $('#productBattery').val();
+    var productImage = $('#productImage').val();
+    var productSellQuantity = $('#productSellQuantity').val();
+    var productDescription = $('#productDescription').val();
+    var productRate = $('#productRate').val();
+    var productEntryPrice = $('#productEntryPrice').val();
+    var productPrice = $('#productPrice').val();
+
+
+
+
+
+    var dataLst = "idProduct=" + idProduct + "&productName=" + productName + "&productType=" + productType + "&productId_promotion=" + productId_promotion + "&productInventory=" + productInventory + 
+        "&productProducer=" + productProducer + "&productRam=" + productRam  + "&productCpu=" + productCpu + "&productMonitor=" + productMonitor + 
+        "&productSystem=" + productSystem + "&productColor=" + productColor  + "&productRom=" + productRom + "&productFontCamera=" + productFontCamera + 
+        "&productBattery=" + productBattery + "&productImage=" + productImage  + "&productSellQuantity=" + productSellQuantity + "&productDescription=" + productDescription + 
+        "&productRate=" + productRate + "&productEntryPrice=" + productEntryPrice  + "&productPrice=" + productPrice;
+
+    $.ajax({
+        url: "/web/admin-edit-product",
+        method: "POST",
+        data: dataLst,
+        success: result => {
+            processMsg(result);
+            $('#admin-modal').modal("hide");
+
+            setTimeout(() => {
+                window.location.assign("/web/index");
+
+            }, 1000);
+
+        },
+        error: error => {
+            console.log("error");
+            alert('Lỗi hệ thống!!! ---> '+error);
+        }
+    })
+}
+
+function adminCRUDDeleteConfirm(idProduct) {
+    var dataLst = "idProduct=" + idProduct;
+
+    $.ajax({
+        url: "/web/admin-delete-product",
+        method: "POST",
+        data: dataLst,
+        success: result => {
+            processMsg(result);
+            $('#admin-modal').modal("hide");
+            setTimeout(() => {
+                window.location.assign("/web/index");
+            }, 1000);
+
+        },
+        error: error => {
+            console.log("error");
+            alert('Lỗi hệ thống!!! ---> '+error);
+        }
+    })
+    
+}
+
+
+
+function processMsg(result) {
+
+    watingModal("hide");
+    var data = result.data;
+    var msg = "";
+    for (let i = 0; i < data.length; i++) {
+       if (data[i].keyData == "error") {
+           errorMsg(data[i].valueData);
+           return;
+       } 
+       if(data[i].keyData == "success"){
+            okMsg(data[i].valueData);
+       }
+        
+    }
+}
+
+//--------------------------------------------------------------
 function convertPrice(){
     let prices = $('.price');
 

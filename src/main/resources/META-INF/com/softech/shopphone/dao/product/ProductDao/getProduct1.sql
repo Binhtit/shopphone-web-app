@@ -23,3 +23,5 @@ FROM
 	TB_PRODUCT
 WHERE
 	ID_PRODUCT = /*idProduct*/0
+AND
+	DEL_F = 0

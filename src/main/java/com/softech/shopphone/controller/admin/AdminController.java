@@ -81,7 +81,7 @@ public class AdminController {
 	
 	
 	
-	@PostMapping(path = "web/admin-get-product")
+	@PostMapping(path = "/web/admin-get-product")
 	@ResponseBody
 	public ResponseEntity<Object> getSingleProduct(@CookieValue(name = "user_token", required = false) String userToken, Integer idProduct, Model model) {
 		DataHolder dataHolder = new DataHolder();
@@ -94,6 +94,56 @@ public class AdminController {
 	}
 	
 	
+	@PostMapping(path = "/web/admin-edit-product")
+	@ResponseBody
+	public ResponseEntity<Object> editProduct(@CookieValue(name = "user_token", required = false) String userToken, Model model, @RequestParam Integer idProduct, @RequestParam String productName,
+			@RequestParam Integer productType, @RequestParam Integer productId_promotion, @RequestParam Integer productInventory, @RequestParam String productProducer, @RequestParam Integer productRam, @RequestParam String productCpu, @RequestParam String productMonitor,
+			@RequestParam String productSystem, @RequestParam String productColor, @RequestParam Integer productRom, @RequestParam String productFontCamera, @RequestParam String productBattery, @RequestParam String productImage,
+			@RequestParam Integer productSellQuantity, @RequestParam String productDescription, @RequestParam String productRate, @RequestParam float productEntryPrice, @RequestParam float productPrice) {
+		
+		DataHolder dataHolder = new DataHolder();
+//		loginService.confirmUser(dataHolder, userToken);
+		RstProduct rstProduct = new RstProduct();
+		
+		rstProduct.setId_product(idProduct);
+		rstProduct.setName(productName);
+		rstProduct.setType(productType);
+		rstProduct.setId_promotion(productId_promotion);
+		rstProduct.setInventory(productInventory);
+		rstProduct.setProducer(productProducer);
+		rstProduct.setRam(productRam);
+		rstProduct.setCpu(productCpu);
+		rstProduct.setMonitor(productMonitor);
+		rstProduct.setSystem(productSystem);
+		rstProduct.setColor(productColor);
+		rstProduct.setRom(productRom);
+		rstProduct.setFont_camera(productFontCamera);
+		rstProduct.setBattery(productBattery);
+		rstProduct.setImage(productImage);
+		rstProduct.setSell_quantity(productSellQuantity);
+		rstProduct.setDescription(productDescription);
+		rstProduct.setRate(productRate);
+		rstProduct.setEntry_price(productEntryPrice);
+		rstProduct.setPrice(productPrice);
+		
+		
+		adminServices.editProduct(dataHolder, userToken, rstProduct);
+		
+		model.addAllAttributes(dataHolder.getModel());
+		return new ResponseEntity<>(dataHolder, HttpStatus.OK);
+	}
+	
+	@PostMapping(path = "/web/admin-delete-product")
+	@ResponseBody
+	public ResponseEntity<Object> deleteProduct(@CookieValue(name = "user_token", required = false) String userToken, Model model, Integer idProduct) {
+		DataHolder dataHolder = new DataHolder();
+//		loginService.confirmUser(dataHolder, userToken);
+		
+		adminServices.deleteProduct(dataHolder, userToken, idProduct);
+		
+		model.addAllAttributes(dataHolder.getModel());
+		return new ResponseEntity<>(dataHolder, HttpStatus.OK);
+	}
 	
 	
 	

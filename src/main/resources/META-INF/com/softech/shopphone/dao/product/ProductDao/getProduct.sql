@@ -23,3 +23,5 @@ FROM
 	TB_PRODUCT
 WHERE
 	TYPE = /*type*/0
+AND
+	DEL_F = 0

@@ -5,6 +5,7 @@ import java.util.List;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
+import org.seasar.doma.Update;
 import org.seasar.doma.boot.ConfigAutowireable;
 
 import com.softech.shopphone.entity.product.RstProduct;
@@ -27,4 +28,12 @@ public interface ProductDao {
 	
 	@Select
 	public List<RstProduct> getNewProduct(Integer type);
+	
+	@Update(sqlFile = true)
+	public int editProduct(RstProduct rstProduct);
+	
+	@Update(sqlFile = true)
+	public int deleteProduct(Integer id_product);
+	
+	
 }

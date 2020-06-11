@@ -72,6 +72,43 @@ public class AdminServices {
 		return dataHolder;
 	}
 	
+	public DataHolder editProduct(DataHolder dataHolder, String userToken, RstProduct rstProduct) {
+		
+		try {
+			productDao.editProduct(rstProduct);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			dataHolder.error("Lỗi hệ thống!");
+			return dataHolder;
+		}
+		
+		dataHolder.ok("Chỉnh sửa thành công");
+		
+		return dataHolder;
+				
+				
+	}
+	
+	public DataHolder deleteProduct(DataHolder dataHolder, String userToken, Integer id_product) {
+		
+		try {
+			productDao.deleteProduct(id_product);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			dataHolder.error("Lỗi hệ thống!");
+			return dataHolder;
+		}
+		
+		dataHolder.ok("Xoá thành công");
+		
+		return dataHolder;
+		
+		
+	}
+	
+	
 	
 	
 	

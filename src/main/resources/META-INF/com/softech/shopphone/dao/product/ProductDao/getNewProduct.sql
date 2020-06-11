@@ -23,5 +23,7 @@ FROM
 	tb_product
 WHERE
 	TYPE = /*type*/0 
+AND
+	DEL_F = 0
 ORDER BY 
     date_update DESC
